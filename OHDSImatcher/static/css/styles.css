@@ -1,0 +1,7 @@
+.btn{
+	margin : 5px;
+}
+.well{
+	max-height: 600px;
+	overflow: scroll;
+}
