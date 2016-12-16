@@ -7,10 +7,11 @@ from xml.etree import ElementTree as ET
 
 def index(request):
 	ohdsiconcept = {}
+	counts_orig = {'count':[]}
 	if request.method == 'POST':
 		xmlform = XMLInputForm(data = request.POST)
 		print("about to validate form")
-		print(request.POST)
+		# print(request.POST)
 		if xmlform.is_valid():
 			print("form is valid")
 			data = xmlform.cleaned_data
@@ -32,7 +33,6 @@ def index(request):
 			cnt = 0
 			for itr in js_obj['root']['sent']['entity']:
 				# print 'Concept:', itr['$'], ' ID:', itr['@class']
-
 				params = {
 					"QUERY": itr['$'],
 					"DOMAIN_ID": [itr['@class']]
@@ -50,23 +50,26 @@ def index(request):
 					concepts = json.loads(response.text)
 
 
-				# payload = []
-				# for itr2 in concepts:
-				# 	payload.append(itr2["CONCEPT_ID"])
+				payload = []
+				for itr2 in concepts:
+					payload.append(itr2["CONCEPT_ID"])
 					
-				# print 'Count playload: ', len(payload), payload
-				# if payload == []:
-				# 	concept_set = {"id": cnt,
-				# 	"name": itr['$'],
-				# 	}
-				# else:
 				concept_set = {
 					"id": cnt,							
 					"name": itr['$'],
-		                "expression": {
-		                "items": []
-		            }
-		        }
+						"expression": {
+						"items": []
+					}
+				}
+				if payload == []:
+					count = []
+				else:
+					url_cnt = "http://54.242.168.196/WebAPI/CS1/cdmresults/conceptRecordCount"
+					# fetch all the counts informaiton
+					response = requests.post(url_cnt, data=json.dumps(payload), headers=headers)
+					count = json.loads(response.text)
+				print count
+				counts_orig['count'].append(count)
 				for itr4 in concepts:
 					concept = { "concept": itr4 }
 					concept_set["expression"]["items"].append(concept);
@@ -76,9 +79,11 @@ def index(request):
 				cnt += 1
 			# concepts = codecs.open(output_dir, 'w')
 			ohdsiconcept = json.dumps(ohdsi)
+			counts = json.dumps(counts_orig)
 			print "concept id match Finished!"
 			context = {
 				'ohdsi':ohdsiconcept,
+				'counts': counts,
 			}
 			return render(request, 'OHDSImatcher/conceptFilter.html',context)
 		else:
