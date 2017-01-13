@@ -3,10 +3,15 @@
 {% block main_content %}
 
   	<div class="container">
+  		<table class="table" id = "stat"></table>
 		<div id="ohdsi"></div>
 		<div id="transform"></div>
 		<!-- <div><pre id="transform"></pre></div> -->
-		<script>onLoadConceptEvent('{{ohdsi}}','{{counts}}');</script>
+		<script type="text/javascript">			
+			ohdsi_json_orig = {{ohdsi | safe}};
+			ohdsi_counts = {{counts | safe}};
+			onLoadConceptEvent();
+		</script>
 	</div>
 
 {% endblock main_content %}
