@@ -1,0 +1,29 @@
+<root>
+	<sent>
+		<text>Has a known history of HIV , multiple or severe drug allergies , or severe post-treatment hypersensitivity reactions .</text>
+		<entity class="Condition" index="T1" negated="N" relation="T3:modified_by|T2:modified_by" start="5"> HIV </entity>
+		 <attribute class="Qualifier" index="T2" start="7"> multiple </attribute>
+		 <attribute class="Qualifier" index="T3" start="9"> severe </attribute>
+		 <entity class="Condition" index="T4" negated="N" relation="T5:modified_by|T2:modified_by|T3:modified_by" start="10"> drug allergies </entity>
+		 <attribute class="Qualifier" index="T5" start="14"> severe </attribute>
+		 <entity class="Condition" index="T6" negated="N" relation="T5:modified_by" start="15"> post-treatment hypersensitivity reactions </entity>
+		
+
+	</sent>
+</root>
+<root>
+	<sent>
+		<text>- within the previous 2 years</text>
+		<attribute class="Temporal_measurement" index="T1" start="1">Within the previous 2 years </attribute>
+		<attribute class="Qualifier" index="T2" start="7">unstable</attribute>
+		<attribute class="Qualifier" index="T3" start="9">clinicallly significant</attribute>
+		<entity class="Condition" encoding="40568109" index="T4" negation="N" relation="T2:modified_by|T3:modified_by|T1:has_tempMea" start="11">cardiovascular disease</entity>
+	</sent>
+</root>
+<root>
+	<sent>
+		<text>GDS 15 score is less than 6.</text>
+		<entity class="Observation" encoding="45514749" index="T1" negation="N" relation="T2:has_value" start="0">GDS 15 score</entity>
+		<attribute class="Measurement" index="T2" start="4">less than 6 </attribute>
+	</sent>
+</root>

@@ -1,0 +1,128 @@
+{
+  "InclusionRules": [],
+  "QualifiedLimit": {
+    "Type": "First"
+  },
+  "PrimaryCriteria": {
+    "PrimaryCriteriaLimit": {
+      "Type": "All"
+    },
+    "ObservationWindow": {
+      "PostDays": 0,
+      "PriorDays": 0
+    },
+    "CriteriaList": []
+  },
+  "ConceptSets": [
+    {
+      "expression": {
+        "items": [
+          {
+            "concept": {
+              "VOCABULARY_ID": "MedDRA",
+              "CONCEPT_CLASS_ID": "LLT",
+              "STANDARD_CONCEPT_CAPTION": "Classification",
+              "CONCEPT_NAME": "Arteriosclerotic cardiovascular disease",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "C",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "10051614",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 37689039
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Clinical Finding",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "Arteriosclerotic cardiovascular disease",
+              "INVALID_REASON": "U",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Invalid",
+              "CONCEPT_CODE": "39468009",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 40568109
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "CIEL",
+              "CONCEPT_CLASS_ID": "Diagnosis",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "Arteriosclerotic Cardiovascular Disease",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "121486",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 45927007
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Clinical Finding",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "Atherosclerotic cardiovascular disease",
+              "INVALID_REASON": "U",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Invalid",
+              "CONCEPT_CODE": "195251000",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 40392800
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "Read",
+              "CONCEPT_CLASS_ID": "Read",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "Atherosclerotic cardiovascular disease",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "G342.00",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 45506685
+            }
+          }
+        ]
+      },
+      "id": 0,
+      "name": "cardiovascular disease"
+    }
+  ],
+  "AdditionalCriteria": {
+    "DemographicCriteriaList": [],
+    "Type": "ALL",
+    "Groups": [],
+    "CriteriaList": [
+      {
+        "StartWindow": {
+          "Start": {
+            "Coeff": -1,
+            "Days": 730
+          },
+          "End": {
+            "Coeff": 1,
+            "Days": "0"
+          }
+        },
+        "Occurrence": {
+          "Count": 1,
+          "Type": 2
+        },
+        "Criteria": {
+          "ConditionOccurrence": {
+            "CodesetId": 0
+          }
+        }
+      }
+    ]
+  },
+  "CensoringCriteria": [],
+  "ExpressionLimit": {
+    "Type": "First"
+  }
+}
