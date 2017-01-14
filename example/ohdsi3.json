@@ -1,0 +1,74 @@
+{
+  "InclusionRules": [],
+  "QualifiedLimit": {
+    "Type": "First"
+  },
+  "PrimaryCriteria": {
+    "PrimaryCriteriaLimit": {
+      "Type": "All"
+    },
+    "ObservationWindow": {
+      "PostDays": 0,
+      "PriorDays": 0
+    },
+    "CriteriaList": [
+      {
+        "Measurement": {
+          "ValueAsNumber": {
+            "Value": 6,
+            "Op": "lt"
+          },
+          "CodesetId": 0
+        }
+      }
+    ]
+  },
+  "ConceptSets": [
+    {
+      "expression": {
+        "items": [
+          {
+            "concept": {
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Observable Entity",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "CONCEPT_NAME": "Current View Provisional Problem Description item 15 score - behavioural difficulties",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "S",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "987391000000103",
+              "DOMAIN_ID": "Observation",
+              "CONCEPT_ID": 46286879
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Observable Entity",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "CONCEPT_NAME": "HoNOS-LD (Health of the Nation Outcome Scales for People with Learning Disabilities) rating scale 15 score - activities of daily living outside the home",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "S",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "987771000000101",
+              "DOMAIN_ID": "Observation",
+              "CONCEPT_ID": 46286583
+            }
+          }
+        ]
+      },
+      "id": 0,
+      "name": "GDS 15 score"
+    }
+  ],
+  "AdditionalCriteria": {
+    "DemographicCriteriaList": [],
+    "Type": "ALL",
+    "Groups": [],
+    "CriteriaList": []
+  },
+  "CensoringCriteria": [],
+  "ExpressionLimit": {
+    "Type": "First"
+  }
+}
