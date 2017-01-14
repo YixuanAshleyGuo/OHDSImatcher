@@ -245,13 +245,12 @@ function onSubmitConcept(){
 	var prev = '<button class="btn btn-default btn-block" action="" onclick="onChangeConcept()">Previous</button>';
 
 	var ohdsi_form = document.getElementById("ohdsi");
-	// ohdsi_form.style.visibility ='hidden';
 	ohdsi_form.innerHTML = "";
 	var ohdsi_div = document.getElementById("transform");
-	// ohdsi_div.appendChild(ohdsi_submit);
 	var pre = '<pre>'+json_pretty+'</pre>';
+	var title = '<h3>OHDSI json format of eligibility criteria text</h3><p>please copy and paste to <a href="http://www.ohdsi.org/web/atlas/#/cohortdefinition/0">OHDSI ATLAS</a> platform''s json text field and generate the cohort for further research.</p>'
+	ohdsi_div.insertAdjacentHTML('beforeend',title);
 	ohdsi_div.insertAdjacentHTML('beforeend',pre);
-	// ohdsi_div.innerHTML = json_pretty;
 	ohdsi_div.insertAdjacentHTML('beforeend',prev);
 	
 }

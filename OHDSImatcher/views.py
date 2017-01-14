@@ -196,7 +196,38 @@ def index(request):
 								"DrugExposure":{
 									"CodesetId": cnt
 								}}
-								primary_criteria["CriterialList"].append(drug_exp)
+								additional_criteria["CriterialList"].append(drug_exp)
+
+							# set the entity occurance to be 1
+							if itr['@class'] == "Condition":
+								entity = "ConditionOccurrence"
+							elif itr['@class'] == "Observation":
+								entity = "Observation"
+							elif itr['@class'] == "Procedure_Device":
+								entity = "ProcedureOccurrence"
+							elif itr['@class'] == "Drug":
+								entity = "DrugExposure"
+							criteria_cur = {
+								"Criteria":{
+									entity: {
+										"CodesetId": cnt
+									}
+								},
+								"StartWindow":{
+									"Start":{
+										"Coeff":-1
+									},
+									"End":{
+										"Coeff": 1
+									}
+								},
+								"Occurrence":{
+									"Type": 2,
+									"Count": 1
+								}
+							}
+							additional_criteria["CriteriaList"].append(criteria_cur)
+
 
 							# if the entity has measurement value, add the measurement to the criteria list
 							if itr['@relation'].find("has_value") != -1 or itr['@relation'].find("has_tempMea") != -1:
@@ -216,6 +247,27 @@ def index(request):
 												itr_attr = itrs['attribute']
 											if itr_attr['@index'] == idx:
 												attr = itr_attr['$']
+												# if the value has between keyword, means that it has lower and upper values
+												if attr.find("between") != -1:
+													op = "bt"
+													value = [0,0]
+													j = 0
+													for i in attr.split():
+														if j < 1 and i.isdigit():
+															value[j] = int(i)
+															j += 1
+													criteria_cur = {
+														"Measurement":{
+															"CodesetId": cnt,
+															"ValueAsNumber":{
+																"Value": value[0],
+																"Extent": value[1],
+																"Op": op
+															}
+														}
+													}
+													break
+
 												# extract the value information
 												if attr.find("less than") != -1 or attr.find("smaller than") != -1 or attr.find("<=") != -1:
 													op = "lt"
@@ -240,11 +292,10 @@ def index(request):
 													}
 												}
 												primary_criteria["CriteriaList"].append(criteria_cur)
-											break
+												break
 											# only one attribute, and has been processed already, so jump out of the loop
 											if single2 == 1:
 												break
-										continue
 
 									# find the temperal measurement, add to the additional criteria list
 									if irelation.find("has_tempMea") != -1:
