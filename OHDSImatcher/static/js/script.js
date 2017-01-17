@@ -3,6 +3,8 @@ var ohdsi_json_orig;
 var ohdsi_json;
 var ohdsi_counts;
 var selectAlls = [];
+var nct_eli = {};
+var xml_text = "";
 
 function findCount(counts,id){
 	for(var i = 0; i < counts.length; i++){
@@ -13,32 +15,50 @@ function findCount(counts,id){
 	return [0,0];
 }
 
+function getCT(){
+	var ct_num = document.getElementById("ct_num").value;
+	console.log("the ct_num is: "+ct_num);
+	if(ct_num.substring(0,3) != "NCT" && ct_num.substring(0,3) != "nct"){
+		// the input string is not valid
+		alert("please enter valid ClinicalTrials.gov Identifier! \n e.g. NCT01136369");
+	}
+	else{
+		window.location.href = "/EliIE/"+ct_num;
+	}
+}
 
-// on load funciton, initiate the input text when loading the index page
+function onLoadEliIE(){
+		// set the ClinicalTrial.gov free text if provided
+	var freetxt_area = document.getElementById("eliieinput");
+    if ('text' in nct_eli){
+      freetxt_area.value = nct_eli['text'];   
+    }
+    else{
+      freetxt_area.placeholder="e.g. Has a known history of HIV, multiple or severe drug allergies, or severe post-treatment hypersensitivity reactions.";
+    }
+}
+
+// on load funciton for the EliIEx, initiate the input text when loading the index page
 function onLoadEvent(){
-		var xmlinput = document.getElementById("xmlinput");
-		var xmllabel = document.createElement("label");
-		xmllabel.for = "xmltext";
-		xmllabel.appendChild(document.createTextNode("Please enter the XML text here:"));
-		var xmltext = document.createElement("textarea");
-		xmltext.className = "form-control span6";
-		xmltext.rows = "18";
-		xmltext.form = "xmlinput";
-		xmltext.name="xmlinput";
-		xmltext.placeholder="please enter the parsed xml text here";
-		xmltext.required = true;
-		xmltext.id = "xmltext";
-		var xmlsubmit = document.createElement("button");
-		xmlsubmit.className = "btn btn-primary pull-right";
-		xmlsubmit.innerHTML = "Start Transform";
-
-		xmlinput.appendChild(xmllabel);
-		xmlinput.appendChild(xmltext);
-		xmlinput.appendChild(xmlsubmit);
+		var xmltext = document.getElementById("xmlinput");
+		if(xml_text == ""){
+			xmltext.placeholder='e.g. \n \
+		<root>\n\
+			<sent>\n\
+				<text>Has a known history of HIV , multiple or severe drug allergies , or severe post-treatment hypersensitivity reactions .</text>\n\
+				<entity class="Condition" index="T1" negated="N" relation="T3:modified_by|T2:modified_by" start="5"> HIV </entity>\n\
+				 <attribute class="Qualifier" index="T2" start="7"> multiple </attribute>\n\
+				 <attribute class="Qualifier" index="T3" start="9"> severe </attribute>\n\
+				 <entity class="Condition" index="T4" negated="N" relation="T5:modified_by|T2:modified_by|T3:modified_by" start="10"> drug allergies </entity>\n\
+				 <attribute class="Qualifier" index="T5" start="14"> severe </attribute>\n\
+				 <entity class="Condition" index="T6" negated="N" relation="T5:modified_by" start="15"> post-treatment hypersensitivity reactions </entity>\n\
+			</sent>\n\
+		</root>';
+		}
 }
 
 // load the concept matched list
-function onLoadConceptEvent(ohdsi,counts){
+function onLoadConceptEvent(){
 	onChangeConcept();
 }
 
@@ -203,6 +223,36 @@ function onChangeConcept(){
 	ohdsi_form.insertAdjacentHTML('beforeend',submit);
 }
 
+// Copies a string to the clipboard. Must be called from within an event handler such as click.
+// May return false if it failed, but this is not always
+// possible. Browser support for Chrome 43+, Firefox 42+, Edge and IE 10+.
+// No Safari support, as of (Nov. 2015). Returns false.
+// IE: The clipboard feature may be disabled by an adminstrator. By default a prompt is
+// shown the first time the clipboard is used (per session).
+function copyToClipboard(id) {
+	var json_txt = document.getElementById(id);
+    if (window.clipboardData && window.clipboardData.setData) {
+        // IE specific code path to prevent textarea being shown while dialog is visible.
+        return clipboardData.setData("Text", json_txt.value); 
+
+    } else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
+        // var textarea = document.createElement("textarea");
+        // textarea.textContent = text;
+        // textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in MS Edge.
+        // document.body.appendChild(textarea);
+        json_txt.select();
+        // textarea.select();
+        try {
+            return document.execCommand("copy");  // Security exception may be thrown by some browsers.
+        } catch (ex) {
+            console.warn("Copy to clipboard failed.", ex);
+            return false;
+        } finally {
+            document.body.removeChild(textarea);
+        }
+    }
+}
+
 function onSubmitConcept(){
 	console.log("come in onSubmitConcept");
 	var ohdsi = {"ConceptSets":[]};
@@ -227,12 +277,12 @@ function onSubmitConcept(){
 		for(j = 1; j < div1.length; ++j){
 			var div2 = div1[j].childNodes[0].childNodes[0];
 			if(!div2.checked){
-				console.log("deleting "+j+ "'s childnode");
+				// console.log("deleting "+j+ "'s childnode");
 				remove.push(j-1);
 			}
 		}
 		for(j = remove.length-1; j >=0; j--){
-			console.log("deleting (i-1)/2= "+(i-1)/2+" j= "+j);
+			// console.log("deleting (i-1)/2= "+(i-1)/2+" j= "+j);
 			ohdsi_json["ConceptSets"][(i-1)/2]["expression"]["items"].splice(remove[j],1);
 		}
 	}
@@ -242,16 +292,21 @@ function onSubmitConcept(){
 
 	ohdsi_submit.appendChild(document.createTextNode(json_pretty));
 	
+	var copy = '<button id="copy_txt" class="btn btn-success btn-block">Click to Copy</button>'
 	var prev = '<button class="btn btn-default btn-block" action="" onclick="onChangeConcept()">Previous</button>';
 
 	var ohdsi_form = document.getElementById("ohdsi");
 	ohdsi_form.innerHTML = "";
 	var ohdsi_div = document.getElementById("transform");
-	var pre = '<pre>'+json_pretty+'</pre>';
-	var title = '<h3>OHDSI json format of eligibility criteria text</h3><p>please copy and paste to <a href="http://www.ohdsi.org/web/atlas/#/cohortdefinition/0">OHDSI ATLAS</a> platform''s json text field and generate the cohort for further research.</p>'
+	var pre = '<pre id="json_txt">'+json_pretty+'</pre>';
+	var title = '<h3>OHDSI json format of eligibility criteria text</h3><p>please copy and paste to <a href="http://www.ohdsi.org/web/atlas/#/cohortdefinition/0" target="_blanket">OHDSI ATLAS</a> platform\'s json text field and generate the cohort for further research.</p>'
 	ohdsi_div.insertAdjacentHTML('beforeend',title);
-	ohdsi_div.insertAdjacentHTML('beforeend',pre);
+	// ohdsi_div.insertAdjacentHTML('beforeend',copy);
+	ohdsi_div.insertAdjacentHTML('beforeend',pre);	
 	ohdsi_div.insertAdjacentHTML('beforeend',prev);
 	
 }
+
+
+
 

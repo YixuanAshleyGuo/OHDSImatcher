@@ -1,0 +1,36 @@
+{% extends 'OHDSImatcher/base.html' %}
+{% load bootstrap3 %}
+
+{% block main_content %}
+	
+  <div class="container">
+    <h2><a href="https://github.com/Tian312/EliIE" target="_blanket">EliIE</a></h2>
+    <p> - a tool that transforms clinical trial eligibility criteria to xml file EliIE.</p>
+    <p><i>Note: you can enter the ClinicalTrials.gov Identifier to automatically fetch the eligibility criteria or enter the free text by your self.</i></p>
+    
+    <div class="accordion">
+    <h3>Get eligibility criteria free text from the ClinicalTrials.gov</h3>
+    <div>
+          <label for="ct_num" class="col-sm-3 col-form-label col-form-label-lg">ClinicalTrials.gov Identifier:</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control form-control-lg" id="ct_num" placeholder="e.g. NCT01136369">
+          </div>
+          <div class="col-sm-3">
+            <button class="btn btn-primary btn-block" onclick= "getCT()">Get From ClinicalTrials.gov</button>
+          </div>
+    </div>
+    </div>
+
+    <hr>
+    <form id = "freetxt_input" class="form-group" action="" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form eliieform %}
+    <button type="submit" class="btn btn-primary pull-right">Start EliIE</button>
+    </form>    
+    
+  </div>
+  <script type="text/javascript">    
+      nct_eli = {{nct_eli | safe}};
+      onLoadEliIE();
+    </script>
+{% endblock main_content %}

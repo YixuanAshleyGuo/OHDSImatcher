@@ -1,0 +1,18 @@
+{% extends 'OHDSImatcher/base.html' %}
+{% load bootstrap3 %}
+
+{% block main_content %}
+	
+  <div class="container">
+  <h2>EliIEx</h2>
+  <p> - a tool that transforms <a href="https://github.com/Tian312/EliIE" target="_blanket"> EliIE </a> xml result format into OHDSI json format</p>
+
+  <form id = "xmlinputform" class="form-group" action="" method="POST">
+  {% csrf_token %}
+  {% bootstrap_form xmlinputform %}
+  <button type="submit" class="btn btn-primary pull-right">Start Transform</button>
+  </form>
+  </div>
+  <script type="text/javascript">
+  onLoadEvent()</script>
+{% endblock main_content %}

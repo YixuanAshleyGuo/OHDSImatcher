@@ -1,12 +1,121 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from .forms import XMLInputForm
+from .forms import XMLInputForm,EliIEInputForm,EliIEForm
 import requests,urllib,json
 from xmljson import badgerfish as bf
 from xml.etree import ElementTree as ET
 import re
+import textwrap
+import os
+from django.core.files import File
+
 
 def index(request):
+	return render(request,'OHDSImatcher/index.html')
+
+def eliie(request):
+	print("you entered the EliIE page")
+	if request.method == 'POST':
+		xml_text = eliie_exec(request.POST)
+		# xmlinputform = XMLInputForm(initial={'xmlinput':xmlinput})
+		# context = {
+		# 	'xmlinputform':xmlinputform,
+		# }
+		request.session['xml_text'] = xml_text
+		return HttpResponseRedirect('/json-transform')
+	else:
+		eliieform = EliIEInputForm()
+		nct_eli = {}
+		context = {
+			'nct_eli' : nct_eli,
+			'eliieform': eliieform
+		}
+		return render(request,'OHDSImatcher/eliie.html', context)
+
+def eliie_nct(request,slug):
+	print "you entered the EliIE page at",slug
+	if request.method == 'POST':
+		xml_text = eliie_exec(request.POST)
+		request.session['xml_text'] = xml_text
+		return HttpResponseRedirect('/json-transform')
+		# xmlinputform = XMLInputForm(initial={'xmlinput':xmlinput})
+		# context = {
+		# 	'xmlinputform':xmlinputform,
+		# }
+		# return render(request,'OHDSImatcher/json_transform.html',context)
+	else:
+		eliieform = EliIEInputForm()
+		nct_eli = {}
+		if slug[0:3] != "NCT" and slug[0:3] != "nct":
+			nct_txt = "entered ClinicalTrials.gov ID: "+slug+", but this is not valid!"
+		else:
+			url = "https://clinicaltrials.gov/show/"+slug+"?displayxml=true"
+			response = urllib.urlopen(url)
+			try:
+				nct_orig = response.read().decode('utf-8')
+				nct_root = ET.fromstring(nct_orig)
+				eli = nct_root.findall('eligibility')[0]
+				nct_txt = "entered ClinicalTrials.gov ID: "+slug+", and success fetch response."
+				for child in eli:
+					if child.tag == "criteria":
+						nct_eli['text'] = child.findall('textblock')[0].text
+					elif child.tag == "gender":
+						nct_eli['gender'] = child.text
+					elif child.tag == "minimum_age":
+						nct_eli['min_age'] = child.text
+					elif child.tag == "maximum_age":
+						nct_eli['max_age'] = child.text			
+
+			except ValueError:
+				nct_txt = "entered ClinicalTrials.gov ID: "+slug+", and but did not fetch response!"
+				print "the clinical trial NCT does not match any record"
+
+		context = {
+			'nct_eli': nct_eli,
+			'eliieform': eliieform
+		}
+		return render(request,'OHDSImatcher/eliie.html',context)
+
+def eliie_exec(post):
+	eliieform = EliIEForm(data = post)
+	# if eliieform['eliie_package_directory'] == eliieform2['eliie_package_directory']:
+	# 	print 'the eliie form is not accepting the data at all'
+	# else:
+	# 	print 'the eliie form accept the data \n', eliieform['eliie_package_directory'], ' \nand \n',eliieform2['eliie_package_directory']
+	print "about to validate EliIE input form ", post['eliie_package_directory']
+	if eliieform.is_valid():
+		print("EliIE input form is valid")
+		data = eliieform.cleaned_data	
+
+		# write the free text to file
+		nct_file = data['eliie_output_directory']+'/'+data['eliie_file_name']+'.txt'
+		with open(nct_file,'w') as f:
+			myfile = File(f)
+			myfile.write(data['eliie_input_free_text'])
+		myfile.closed
+		f.closed
+
+		# change the directory to the EliIE package path, then execute the 2 steps
+		os.chdir(data['eliie_package_directory'])
+
+		command = 'python NamedEntityRecognition.py "'+ data['eliie_output_directory']+'" '+data['eliie_file_name'] + '.txt ' + data['eliie_output_directory']
+		print 'Attention: command 1 NER: ', command,' is about to execute, check the output file'
+		os.system(command)
+		command = 'python Relation.py '+ data['eliie_output_directory']+' '+data['eliie_file_name']+'.txt'
+		print 'Attention: command 2 Relation: ', command, ' is about to execute, check the output file'
+		os.system(command)
+				
+		# read the parsed xml file
+		xml_fname = data['eliie_file_name']+'_Parsed.xml'
+		xml_txt = open(os.path.join(data['eliie_output_directory'],xml_fname)).read()
+		print 'result xml is ready'
+		return xml_txt
+	else:
+		print "EliIE form is not valid for ", eliieform.errors
+		return ""
+
+
+def json_trans(request):
 	ohdsiconcept = {}
 	counts_orig = {'count':[]}
 	primary_criteria = {
@@ -27,10 +136,10 @@ def index(request):
 	}
 	if request.method == 'POST':
 		xmlform = XMLInputForm(data = request.POST)
-		print("about to validate form")
+		print("about to validate XML input form")
 		# print(request.POST)
 		if xmlform.is_valid():
-			print("form is valid")
+			print("XML input form is valid")
 			data = xmlform.cleaned_data
 			# for temp use, should be removed later
 			# inputdata = '<root>'++'</root>'
@@ -230,7 +339,7 @@ def index(request):
 
 
 							# if the entity has measurement value, add the measurement to the criteria list
-							if itr['@relation'].find("has_value") != -1 or itr['@relation'].find("has_tempMea") != -1:
+							if itr.get('@relation') and (itr['@relation'].find("has_value") != -1 or itr['@relation'].find("has_tempMea") != -1):
 								relation_split = itr['@relation'].split('|')
 								for irelation in relation_split:
 									print irelation
@@ -431,19 +540,37 @@ def index(request):
 			counts = json.dumps(counts_orig)
 			print "concept id match Finished!"
 			# print ohdsiconcept
-			context = {
-				'ohdsi':ohdsiconcept,
-				'counts': counts,
-			}
-			return render(request, 'OHDSImatcher/conceptFilter.html',context)
+			request.session['ohdsi'] = ohdsiconcept
+			request.session['counts'] = counts
+			return HttpResponseRedirect('/json-transform/result')
 		else:
 			print "the form is not valid"
 
+	if request.session.get('xml_text'):
+		xmlinputform = XMLInputForm(initial={'xmlinput':request.session['xml_text']})
+	else:
+		xmlinputform = XMLInputForm()
 	context = {
-		'ohdsi':ohdsiconcept,
+		'xmlinputform':xmlinputform
 	}
-	return render(request,'OHDSImatcher/index.html',context)
+	return render(request,'OHDSImatcher/json_transform.html',context)
 
+def json_trans_res(request):
+	if request.session.get('ohdsi') and request.session.get('counts'):
+		context = {
+			'ohdsi': request.session['ohdsi'],
+			'counts': request.session['counts'],
+		}
+	else:
+		context = {
+			'ohdsi': {},
+			'counts': []
+		}
+	return render(request, 'OHDSImatcher/concept_filter.html',context)
+
+
+# concept match request function: 
+# request the OHDSI API to match the entities with concepts
 def ohdsirequest(query, domain):
 	url_con = "http://54.242.168.196/WebAPI/JNJL/vocabulary/search"
 	# prepare to send http request

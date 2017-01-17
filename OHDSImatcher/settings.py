@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # The Django sites framework is required
     'django.contrib.sites',
     'bootstrap3',
+    'filebrowser',
 ]
 
 MIDDLEWARE_CLASSES = [

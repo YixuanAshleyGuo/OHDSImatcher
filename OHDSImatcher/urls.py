@@ -20,6 +20,9 @@ from . import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.index, name='index'),
-    # url(r'/concept-filter^$', views.concept_filter, name='concept-filter'),
-    
+    url(r'^EliIE$', views.eliie, name = 'eliie'),
+    url(r'^EliIE/(?P<slug>[A-Za-z0-9]+)$', views.eliie_nct, name = 'eliie-nct'),
+    url(r'^json-transform$', views.json_trans, name="json-trans"),
+    url(r'^json-transform/result$', views.json_trans_res, name="json-trans-res"),
+    # url(r'^json-transform-from-eliie$', views.json_trans_from_eliie, name="json-trans-from-eliie"),
 ]

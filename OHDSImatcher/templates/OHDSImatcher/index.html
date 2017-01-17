@@ -3,14 +3,26 @@
 {% block main_content %}
 	
   <div class="container">
-  <h2>EliIEx</h2>
-  <p> - a tool that transforms <a href="https://github.com/Tian312/EliIE" target="_blanket"> EliIE </a> xml result format into OHDSI json format</p>
+  <h2>EliIE APP</h2>
+  <p> - a web application that provides seamless service to transforms clinical trial eligibility text to into OHDSI json format. <br>The free text is first processed by<a href="https://github.com/Tian312/EliIE" target="_blanket"> EliIE </a>, produce the parsed xml format result, then transformed to OHDSI json format.</p>
+  <div class="well">
+    <div class="row">
+      <div class="col-6 col-md-6"><strong>EliIE</strong></div>
+      <div class="col-6 col-md-6"><strong>EliIEx</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-6 col-md-6">free text => XML file</div>
+      <div class="col-6 col-md-6">XML file => JSON file</div>
+    </div>
+    <div class="row">
+      <div class="col-6 col-md-6">
+      <a href= "{% url 'eliie' %}" class="btn btn-primary btn-block">Start</a>
+      </div>
+      <div class="col-6 col-md-6">
+      <a href= "{% url 'json-trans' %}" class="btn btn-primary btn-block">Start</a>    
+      </div>
+    </div>
+  </div>
 
-  <div id="inputform">
-  <form id = "xmlinput" class="form-group" action="" method="POST">
-  {% csrf_token %}
-  </form>
   </div>
-  </div>
-  <script type="text/javascript">onLoadEvent()</script>
 {% endblock main_content %}
