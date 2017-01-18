@@ -223,36 +223,6 @@ function onChangeConcept(){
 	ohdsi_form.insertAdjacentHTML('beforeend',submit);
 }
 
-// Copies a string to the clipboard. Must be called from within an event handler such as click.
-// May return false if it failed, but this is not always
-// possible. Browser support for Chrome 43+, Firefox 42+, Edge and IE 10+.
-// No Safari support, as of (Nov. 2015). Returns false.
-// IE: The clipboard feature may be disabled by an adminstrator. By default a prompt is
-// shown the first time the clipboard is used (per session).
-function copyToClipboard(id) {
-	var json_txt = document.getElementById(id);
-    if (window.clipboardData && window.clipboardData.setData) {
-        // IE specific code path to prevent textarea being shown while dialog is visible.
-        return clipboardData.setData("Text", json_txt.value); 
-
-    } else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
-        // var textarea = document.createElement("textarea");
-        // textarea.textContent = text;
-        // textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in MS Edge.
-        // document.body.appendChild(textarea);
-        json_txt.select();
-        // textarea.select();
-        try {
-            return document.execCommand("copy");  // Security exception may be thrown by some browsers.
-        } catch (ex) {
-            console.warn("Copy to clipboard failed.", ex);
-            return false;
-        } finally {
-            document.body.removeChild(textarea);
-        }
-    }
-}
-
 function onSubmitConcept(){
 	console.log("come in onSubmitConcept");
 	var ohdsi = {"ConceptSets":[]};
@@ -298,11 +268,16 @@ function onSubmitConcept(){
 	var ohdsi_form = document.getElementById("ohdsi");
 	ohdsi_form.innerHTML = "";
 	var ohdsi_div = document.getElementById("transform");
+	var textarea = document.createElement("textarea");
+	textarea.rows = "20";
+	textarea.className = "form-control span6";
 	var pre = '<pre id="json_txt">'+json_pretty+'</pre>';
 	var title = '<h3>OHDSI json format of eligibility criteria text</h3><p>please copy and paste to <a href="http://www.ohdsi.org/web/atlas/#/cohortdefinition/0" target="_blanket">OHDSI ATLAS</a> platform\'s json text field and generate the cohort for further research.</p>'
 	ohdsi_div.insertAdjacentHTML('beforeend',title);
 	// ohdsi_div.insertAdjacentHTML('beforeend',copy);
-	ohdsi_div.insertAdjacentHTML('beforeend',pre);	
+	// textarea.insertAdjacentHTML('beforeend',pre);
+	textarea.innerHTML = json_pretty;
+	ohdsi_div.appendChild(textarea);	
 	ohdsi_div.insertAdjacentHTML('beforeend',prev);
 	
 }

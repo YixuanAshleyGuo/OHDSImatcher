@@ -7,13 +7,11 @@
 		 <entity class="Condition" index="T4" negated="N" relation="T5:modified_by|T2:modified_by|T3:modified_by" start="10"> drug allergies </entity>
 		 <attribute class="Qualifier" index="T5" start="14"> severe </attribute>
 		 <entity class="Condition" index="T6" negated="N" relation="T5:modified_by" start="15"> post-treatment hypersensitivity reactions </entity>
-		
-
 	</sent>
 </root>
 <root>
 	<sent>
-		<text>- within the previous 2 years</text>
+		<text>Within the previous 2 years, unstable or clinically significant cardiovascular disease</text>
 		<attribute class="Temporal_measurement" index="T1" start="1">Within the previous 2 years </attribute>
 		<attribute class="Qualifier" index="T2" start="7">unstable</attribute>
 		<attribute class="Qualifier" index="T3" start="9">clinicallly significant</attribute>
@@ -25,5 +23,115 @@
 		<text>GDS 15 score is less than 6.</text>
 		<entity class="Observation" encoding="45514749" index="T1" negation="N" relation="T2:has_value" start="0">GDS 15 score</entity>
 		<attribute class="Measurement" index="T2" start="4">less than 6 </attribute>
+	</sent>
+</root>
+
+<root>
+	<sent>
+		<text>Inclusion Criteria O</text>
+		
+
+	</sent>
+	<sent>
+		<text>- Male or Female patients , over the age of 18 , diagnosed pre surgically with T1 or T2</text>
+		<entity class="Observation" index="T2" negated="N" start="8" relation="T3:has_value"> age </entity>
+		<attribute class="Measurement" index="T3" start="10">over 18 </attribute>
+				
+
+	</sent>
+	<sent>
+		<text>breast cancer and scheduled for surgery including sentinel node dissection .</text>
+		<entity class="Condition" index="T4" negated="N" relation="None" start="0"> breast cancer </entity>
+		 <entity class="Procedure_Device" index="T5" negated="N" relation="None" start="5"> surgery </entity>
+		
+
+	</sent>
+	<sent>
+		<text>Exclusion Criteria O</text>
+		
+
+	</sent>
+	<sent>
+		<text>- Patients diagnosed pre surgically with large or locally advanced ( T3 and T4 ) breast</text>
+		
+
+	</sent>
+	<sent>
+		<text>cancers .</text>
+		<entity class="Condition" index="T6" negated="N" relation="None" start="0"> cancers </entity>
+		
+
+	</sent>
+	<sent>
+		<text>- Patients diagnosed with inflammatory breast cancer .</text>
+		<entity class="Condition" index="T7" negated="N" relation="None" start="4"> inflammatory breast cancer </entity>
+		
+
+	</sent>
+	<sent>
+		<text>- Patients diagnosed with ductal carcinoma in situ ( DCIS ) when breast conserving is to</text>
+		<entity class="Condition" index="T8" negated="N" relation="None" start="4"> ductal carcinoma in situ </entity>
+		
+
+	</sent>
+	<sent>
+		<text>be done .</text>
+		
+
+	</sent>
+	<sent>
+		<text>- Patients who are pregnant , as confirmed by a patient treating physician interview .</text>
+		<entity class="Condition" index="T9" negated="N" relation="None" start="4"> pregnant </entity>
+		
+
+	</sent>
+	<sent>
+		<text>- Patients with suspicious palpable axillary lymph nodes .</text>
+		
+
+	</sent>
+	<sent>
+		<text>- Patients currently being treated for or previously diagnosed with , another type of</text>
+		<attribute class="Temporal_measurement" index="T10" start="2"> currently </attribute>
+		
+
+	</sent>
+	<sent>
+		<text>carcinoma .</text>
+		<entity class="Condition" index="T11" negated="N" relation="None" start="0"> carcinoma </entity>
+		
+
+	</sent>
+	<sent>
+		<text>- Patients who have undergone prior non oncologic breast surgery or axillary surgery .</text>
+		<entity class="Procedure_Device" index="T12" negated="N" relation="None" start="8"> breast surgery </entity>
+		 <entity class="Procedure_Device" index="T13" negated="N" relation="None" start="11"> axillary surgery </entity>
+		
+
+	</sent>
+	<sent>
+		<text>- Patients who have received pre-operative systemic therapy .</text>
+		<attribute class="Qualifier" index="T14" start="5"> pre-operative </attribute>
+		 <entity class="Drug" index="T15" negated="N" relation="T14:modified_by" start="6"> systemic therapy </entity>
+		
+
+	</sent>
+	<sent>
+		<text>- Patients who have been judged to be inappropriate by a medical care provider ( i . e .</text>
+		
+
+	</sent>
+	<sent>
+		<text>surgeon , oncologist , pathologists , etc .</text>
+		<entity class="Drug" index="T16" negated="N" relation="None" start="0"> surgeon </entity>
+		 <entity class="Drug" index="T17" negated="N" relation="None" start="2"> oncologist </entity>
+		 <entity class="Drug" index="T18" negated="N" relation="None" start="4"> pathologists </entity>
+		
+
+	</sent>
+	<sent>
+		<text>) .</text>
+		
+
 	</sent>
 </root>

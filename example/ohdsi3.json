@@ -65,7 +65,27 @@
     "DemographicCriteriaList": [],
     "Type": "ALL",
     "Groups": [],
-    "CriteriaList": []
+    "CriteriaList": [
+      {
+        "StartWindow": {
+          "Start": {
+            "Coeff": -1
+          },
+          "End": {
+            "Coeff": 1
+          }
+        },
+        "Occurrence": {
+          "Count": 1,
+          "Type": 2
+        },
+        "Criteria": {
+          "Observation": {
+            "CodesetId": 0
+          }
+        }
+      }
+    ]
   },
   "CensoringCriteria": [],
   "ExpressionLimit": {

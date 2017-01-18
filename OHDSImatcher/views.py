@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from .forms import XMLInputForm,EliIEInputForm,EliIEForm
+from .forms import XMLInputForm,EliIEInputForm, EliIEForm
 import requests,urllib,json
 from xmljson import badgerfish as bf
 from xml.etree import ElementTree as ET
@@ -17,10 +17,6 @@ def eliie(request):
 	print("you entered the EliIE page")
 	if request.method == 'POST':
 		xml_text = eliie_exec(request.POST)
-		# xmlinputform = XMLInputForm(initial={'xmlinput':xmlinput})
-		# context = {
-		# 	'xmlinputform':xmlinputform,
-		# }
 		request.session['xml_text'] = xml_text
 		return HttpResponseRedirect('/json-transform')
 	else:
@@ -38,11 +34,6 @@ def eliie_nct(request,slug):
 		xml_text = eliie_exec(request.POST)
 		request.session['xml_text'] = xml_text
 		return HttpResponseRedirect('/json-transform')
-		# xmlinputform = XMLInputForm(initial={'xmlinput':xmlinput})
-		# context = {
-		# 	'xmlinputform':xmlinputform,
-		# }
-		# return render(request,'OHDSImatcher/json_transform.html',context)
 	else:
 		eliieform = EliIEInputForm()
 		nct_eli = {}
@@ -77,42 +68,42 @@ def eliie_nct(request,slug):
 		return render(request,'OHDSImatcher/eliie.html',context)
 
 def eliie_exec(post):
-	eliieform = EliIEForm(data = post)
-	# if eliieform['eliie_package_directory'] == eliieform2['eliie_package_directory']:
-	# 	print 'the eliie form is not accepting the data at all'
-	# else:
-	# 	print 'the eliie form accept the data \n', eliieform['eliie_package_directory'], ' \nand \n',eliieform2['eliie_package_directory']
-	print "about to validate EliIE input form ", post['eliie_package_directory']
-	if eliieform.is_valid():
-		print("EliIE input form is valid")
-		data = eliieform.cleaned_data	
+	# eliieform = EliIEForm(data = post)
+	# eliieform = EliIEForm
+	# eliieform2 = EliIEForm()
+	# print "about to validate EliIE input form "
+	# print eliieform.cleaned_data['eliie_input_free_text']
+	# if eliieform2.is_valid():
+	data = {
+		'eliie_input_free_text':post['eliie_input_free_text'], 
+		'eliie_package_directory':"/Users/cyixuan/Documents/CUMC_STUDY/SymbolicMethods/Thesis/EliIE",
+		'eliie_file_name': "EliIE_input_free_text",		
+		'eliie_output_directory':"/Users/cyixuan/Documents/CUMC_STUDY/SymbolicMethods/Thesis/EliIE/Tempfile"
+	}
 
-		# write the free text to file
-		nct_file = data['eliie_output_directory']+'/'+data['eliie_file_name']+'.txt'
-		with open(nct_file,'w') as f:
-			myfile = File(f)
-			myfile.write(data['eliie_input_free_text'])
-		myfile.closed
-		f.closed
+	# write the free text to file
+	nct_file = data['eliie_output_directory']+'/'+data['eliie_file_name']+'.txt'
+	with open(nct_file,'w') as f:
+		myfile = File(f)
+		myfile.write(data['eliie_input_free_text'])
+	myfile.closed
+	f.closed
 
-		# change the directory to the EliIE package path, then execute the 2 steps
-		os.chdir(data['eliie_package_directory'])
+	# change the directory to the EliIE package path, then execute the 2 steps
+	os.chdir(data['eliie_package_directory'])
 
-		command = 'python NamedEntityRecognition.py "'+ data['eliie_output_directory']+'" '+data['eliie_file_name'] + '.txt ' + data['eliie_output_directory']
-		print 'Attention: command 1 NER: ', command,' is about to execute, check the output file'
-		os.system(command)
-		command = 'python Relation.py '+ data['eliie_output_directory']+' '+data['eliie_file_name']+'.txt'
-		print 'Attention: command 2 Relation: ', command, ' is about to execute, check the output file'
-		os.system(command)
+	command = 'python NamedEntityRecognition.py "'+ data['eliie_output_directory']+'" '+data['eliie_file_name'] + '.txt ' + data['eliie_output_directory']
+	print 'Attention: command 1 NER: ', command,' is about to execute, check the output file'
+	os.system(command)
+	command = 'python Relation.py '+ data['eliie_output_directory']+' '+data['eliie_file_name']+'.txt'
+	print 'Attention: command 2 Relation: ', command, ' is about to execute, check the output file'		
+	os.system(command)
 				
-		# read the parsed xml file
-		xml_fname = data['eliie_file_name']+'_Parsed.xml'
-		xml_txt = open(os.path.join(data['eliie_output_directory'],xml_fname)).read()
-		print 'result xml is ready'
-		return xml_txt
-	else:
-		print "EliIE form is not valid for ", eliieform.errors
-		return ""
+	# read the parsed xml file
+	xml_fname = data['eliie_file_name']+'_Parsed.xml'
+	xml_txt = open(os.path.join(data['eliie_output_directory'],xml_fname)).read()
+	print 'result xml is ready'
+	return xml_txt
 
 
 def json_trans(request):
@@ -148,18 +139,14 @@ def json_trans(request):
 			js_obj = json.loads(js)
 			# prepare to send http request
 			headers = {'content-type': 'application/json'}
-			#########################################
-			# PART I: get the vocabulary
-			# iterate the json object and add attribute Concept ID in the json object
-			# Request URL:http://54.242.168.196/WebAPI/JNJL/vocabulary/search/drug%20allergies
-			# Request Method:POST
-			# url_con = "http://discovery.dbmi.columbia.edu:8080/WebAPI/Synpuf-1-Percent/vocabulary/search"
 			url_con = "http://54.242.168.196/WebAPI/JNJL/vocabulary/search"
 			#define the result variable
 			ohdsi = {'ConceptSets':[]}
 
 			cnt = 0
 			if js_obj.get('root') and js_obj['root'].get('sent'):
+				payload = []
+				concepts = []
 				if type(js_obj['root']['sent']) == list:
 					single0 = 0
 				else:
@@ -183,161 +170,164 @@ def json_trans(request):
 							if single1 == 1:
 								itr = itrs['entity']
 
-							params = {
-								"QUERY": itr['$'],
-								"DOMAIN_ID": [itr['@class']]
-							}
+#########################################
+# PART I: get the vocabulary
+# iterate the json object and add attribute Concept ID in the json object
+# Request URL:http://54.242.168.196/WebAPI/JNJL/vocabulary/search/drug%20allergies
+# Request Method:POST
+# url_con = "http://discovery.dbmi.columbia.edu:8080/WebAPI/Synpuf-1-Percent/vocabulary/search"
+							# if the entity is "age", do not treat it as concept
+							if itr['$'] != "age":
 
-							# request url method
-							response = requests.post(url_con, data=json.dumps(params), headers=headers)
-							# print "url_con response text: ", response.text
-							concepts = []
-							if response.text == '[]':
-								# safe = '' is for encoding the / in string
-								urlvalue = urllib.quote(itr['$'],safe='')
-								urls = url_con + "/" + urlvalue
-								print "try dropping off the domain: ", urls
-								response = urllib.urlopen(urls)
-								try:
-									concepts = json.loads(response.read().decode('utf-8')) # response.info().get_param('charset')))
-								except ValueError:
-									print(itr['$'],' is not matched')
-							else:
-								concepts = json.loads(response.text)
-								print "concept is matched  at first attempt"
+								params = {
+									"QUERY": itr['$'],
+									"DOMAIN_ID": [itr['@class']]
+								}
+
+								# request url method
+								response = requests.post(url_con, data=json.dumps(params), headers=headers)
+								# print "url_con response text: ", response.text
+								# concepts = []
+								if response.text == '[]':
+									# safe = '' is for encoding the / in string
+									urlvalue = urllib.quote(itr['$'],safe='')
+									urls = url_con + "/" + urlvalue
+									print "try dropping off the domain: ", urls
+									response = urllib.urlopen(urls)
+									try:
+										concepts = json.loads(response.read().decode('utf-8')) # response.info().get_param('charset')))
+									except ValueError:
+										print(itr['$'],' is not matched')
+								else:
+									concepts = json.loads(response.text)
+									print "concept is matched  at first attempt"
 
 
-							# substring match algorithm
-							# try to drop word from the string, once match is found, use the substring for concept match
-							if concepts == []:
-								istr = itr['$']
-								# if the sentence include () remove the words in ()
-								print('before remove (): ', istr)
-								istr = re.sub('\(.*?\)','',istr)
-								print('after remove (): ',istr)
-								# remove and, or, / in the string
-								istr = re.sub('/',' ', istr)
-								istr = re.sub(' and ',' ',istr)
-								istr = re.sub(' or ',' ', istr)
-
-								# remove the leading Modified, and tailing smaller
-								# this problem is a remaining problem that the parser
-								# did not recognize the modifier and measurement word
-								istr = re.sub('Modified', '', istr)
-								istr = re.sub('smaller','',istr)
-
-								# change multiple space into single space
-								istr = re.sub(' +',' ', istr).strip()
-								print('after remove and or /: ', istr)
-
-								# substring match
-								# first, remove one word;
-								# then, remove two words;
-								# etc...
-								concepts = ohdsirequest(istr, itr['@class'])
+								# substring match algorithm - triggered when the whole string does not have match
+								# try to drop word from the string, once match is found, use the substring for concept match
 								if concepts == []:
-									words = istr.split()
-									lens = len(words)
-									# for single word removal, try to remove each word
-									for word in words:
-										# if word end with 's', remove s to see if match is find
-										if word.endswith('s'):
-											word_new = word[:-1]
-											istr0 = istr.replace(word,word_new)
+									istr = itr['$']
+									# if the sentence include () remove the words in ()
+									print('before remove (): ', istr)
+									istr = re.sub('\(.*?\)','',istr)
+									print('after remove (): ',istr)
+									# remove and, or, / in the string
+									istr = re.sub('/',' ', istr)
+									istr = re.sub(' and ',' ',istr)
+									istr = re.sub(' or ',' ', istr)
+
+									# remove the leading Modified, and tailing smaller
+									# this problem is a remaining problem that the parser
+									# did not recognize the modifier and measurement word
+									istr = re.sub('Modified', '', istr)
+									istr = re.sub('smaller','',istr)
+
+									# change multiple space into single space
+									istr = re.sub(' +',' ', istr).strip()
+									print('after remove and or /: ', istr)
+
+									# substring match
+									# first, remove one word;
+									# then, remove two words;
+									# etc...
+									concepts = ohdsirequest(istr, itr['@class'])
+									if concepts == []:
+										words = istr.split()
+										lens = len(words)
+										# for single word removal, try to remove each word
+										for word in words:
+											# if word end with 's', remove s to see if match is find
+											if word.endswith('s'):
+												word_new = word[:-1]
+												istr0 = istr.replace(word,word_new)
+												concepts = ohdsirequest(istr0,itr['@class'])
+												if concepts != []:
+													break
+
+											istr0 = istr.replace(word,'')
+											istr0 = re.sub(' +',' ',istr0).strip()
 											concepts = ohdsirequest(istr0,itr['@class'])
 											if concepts != []:
 												break
 
-										istr0 = istr.replace(word,'')
-										istr0 = re.sub(' +',' ',istr0).strip()
-										concepts = ohdsirequest(istr0,itr['@class'])
-										if concepts != []:
-											break
+										iconcept = []
+										if concepts == []:
+											# for multiple word removal, remove head and tail word, keep the body
+											# for keeping context meaning as much as possible
+											for i in range(2, lens):
+												for j in range(0,i+1):
+													istr0 = istr
+													if j < i:
+														for k in range(0,i-j):
+															istr0 = istr0.replace(words[k],'')
+													if j > 0:
+														for k in range(lens-j,lens):
+															istr0 = istr0.replace(words[k],'')
+													# strip() remove the leading and tailing spaces
+													istr0 = re.sub(' +',' ',istr0).strip()
 
-									iconcept = []
-									if concepts == []:
-										# for multiple word removal, remove head and tail word, keep the body
-										# for keeping context meaning as much as possible
-										for i in range(2, lens):
-											for j in range(0,i+1):
-												istr0 = istr
-												if j < i:
-													for k in range(0,i-j):
-														istr0 = istr0.replace(words[k],'')
-												if j > 0:
-													for k in range(lens-j,lens):
-														istr0 = istr0.replace(words[k],'')
-												# strip() remove the leading and tailing spaces
-												istr0 = re.sub(' +',' ',istr0).strip()
+													print('i= ',i,' j= ',j,' substring= ',istr0)
 
-												print('i= ',i,' j= ',j,' substring= ',istr0)
+													iconcept = ohdsirequest(istr0, itr['@class'])
+													# at the same lose word level, chose the one with smallest concept set, 
+													# which should be more accurate concept set
+													if iconcept != []:
+														print('substring ', istr0,' is matched!')
+														if concepts == [] or len(iconcept) < len(concepts):
+															concepts = iconcept
+															print('len(iconcpet)= ',len(iconcept),' len(concepts)= ',len(concepts))
+												if concepts != []:
+													break
 
-												iconcept = ohdsirequest(istr0, itr['@class'])
-												# at the same lose word level, chose the one with smallest concept set, 
-												# which should be more accurate concept set
-												if iconcept != []:
-													print('substring ', istr0,' is matched!')
-													if concepts == [] or len(iconcept) < len(concepts):
-														concepts = iconcept
-														print('len(iconcpet)= ',len(iconcept),' len(concepts)= ',len(concepts))
-											if concepts != []:
-												break
-
-							payload = []
-							for itr2 in concepts:
-								payload.append(itr2["CONCEPT_ID"])
-								
-							concept_set = {
-								"id": cnt,							
-								"name": itr['$'],
-								# "domain": itr['@class'],
-								"expression": {
-									"items": []
-								}
-							}
-							# negated concept
-							if itr.get('@negation') and itr['@negation'] == "Y":
-								concept_set["isExcluded"] = true
-
-							# if the entity is drug, add drug exposure to criteria list
-							if itr['@class'] == "Drug":
-								drug_exp = {
-								"DrugExposure":{
-									"CodesetId": cnt
-								}}
-								additional_criteria["CriterialList"].append(drug_exp)
-
-							# set the entity occurance to be 1
-							if itr['@class'] == "Condition":
-								entity = "ConditionOccurrence"
-							elif itr['@class'] == "Observation":
-								entity = "Observation"
-							elif itr['@class'] == "Procedure_Device":
-								entity = "ProcedureOccurrence"
-							elif itr['@class'] == "Drug":
-								entity = "DrugExposure"
-							criteria_cur = {
-								"Criteria":{
-									entity: {
-										"CodesetId": cnt
+								payload = []
+								for itr2 in concepts:
+									payload.append(itr2["CONCEPT_ID"])
+									
+								concept_set = {
+									"id": cnt,							
+									"name": itr['$'],
+									# "domain": itr['@class'],
+									"expression": {
+										"items": []
 									}
-								},
-								"StartWindow":{
-									"Start":{
-										"Coeff":-1
-									},
-									"End":{
-										"Coeff": 1
-									}
-								},
-								"Occurrence":{
-									"Type": 2,
-									"Count": 1
 								}
-							}
-							additional_criteria["CriteriaList"].append(criteria_cur)
+#########################################
+# PART II: get the DR, CDR count value of the concepts 
+# request with the concepts sets and get the counts of each one
+# Request URL:http://54.242.168.196/WebAPI/CS1/cdmresults/conceptRecordCount
+# Request Method:POST
+								if payload == []:
+									count = []
+								else:
+									url_cnt = "http://54.242.168.196/WebAPI/CS1/cdmresults/conceptRecordCount"
+									# fetch all the counts informaiton
+									response = requests.post(url_cnt, data=json.dumps(payload), headers=headers)
+									count = json.loads(response.text)
 
+								new_count = []
+								for icount in count:
+									if icount['value'][1] != 0:
+										new_count.append(icount)
+								# sort the count based on ['value'][1] field
+								new_count = sorted(new_count,key=lambda k:k['value'][1], reverse = True)
 
+								counts_orig['count'].append(new_count)
+								for itr4 in concepts:
+									concept = { "concept": itr4 }
+									concept_set["expression"]["items"].append(concept);
+
+								#   append the concept the the ohdsi variable, and increase the number by one
+								ohdsi["ConceptSets"].append(concept_set)
+
+#########################################
+# PART III: get the criteria related to the entity
+# primary criteria: has_value 
+# additional criteria: has_TempMea
+								# negated concept
+								if itr.get('@negation') and itr['@negation'] == "Y":
+									concept_set["isExcluded"] = True
+
+							has_additional_criteria = False
 							# if the entity has measurement value, add the measurement to the criteria list
 							if itr.get('@relation') and (itr['@relation'].find("has_value") != -1 or itr['@relation'].find("has_tempMea") != -1):
 								relation_split = itr['@relation'].split('|')
@@ -356,6 +346,30 @@ def json_trans(request):
 												itr_attr = itrs['attribute']
 											if itr_attr['@index'] == idx:
 												attr = itr_attr['$']
+												# if the value is int, handle differently, set op to be "gt" by default
+												if isinstance(attr, int):
+													if itr['$'] == "age":
+														criteria_cur = {
+														"ConditionOccurrence":{
+															"Age":{
+																"Value": attr,
+																"Op": "gt",
+																}
+															}
+														}
+													else:
+														criteria_cur = {
+														"Measurement":{
+															"CodesetId": cnt,
+															"ValueAsNumber":{
+																"Value": attr,
+																"Op": "gt"
+																}
+															}
+														}
+													primary_criteria["CriteriaList"].append(criteria_cur)
+													break
+
 												# if the value has between keyword, means that it has lower and upper values
 												if attr.find("between") != -1:
 													op = "bt"
@@ -365,22 +379,34 @@ def json_trans(request):
 														if j < 1 and i.isdigit():
 															value[j] = int(i)
 															j += 1
-													criteria_cur = {
-														"Measurement":{
-															"CodesetId": cnt,
-															"ValueAsNumber":{
+													if itr['$'] == age:
+														criteria_cur = {
+														"ConditionOccurrence":{
+															"Age":{
 																"Value": value[0],
 																"Extent": value[1],
 																"Op": op
+																}
 															}
 														}
-													}
+													else:
+														criteria_cur = {
+															"Measurement":{
+																"CodesetId": cnt,
+																"ValueAsNumber":{
+																	"Value": value[0],
+																	"Extent": value[1],
+																	"Op": op
+																}
+															}
+														}
+													primary_criteria["CriteriaList"].append(criteria_cur)
 													break
 
 												# extract the value information
 												if attr.find("less than") != -1 or attr.find("smaller than") != -1 or attr.find("<=") != -1:
 													op = "lt"
-												elif attr.find("greater than") != -1 or attr.find("larger than") != -1 or attr.find(">=") != -1:
+												elif attr.find("greater than") != -1 or attr.find("larger than") != -1 or attr.find("over") != -1 or attr.find(">=") != -1:
 													op = "gt"
 												else:
 													op = "eq" #equal to the value
@@ -391,15 +417,23 @@ def json_trans(request):
 													if i.isdigit():
 														value = int(i)
 														break
-												criteria_cur = {
-													"Measurement":{
-														"CodesetId": cnt,
-														"ValueAsNumber":{
-															"Value": value,
-															"Op": op
+												if itr['$'] == "age":
+													criteria_cur = {
+													"Age":{
+														"Value": value,
+														"Op": op
 														}
 													}
-												}
+												else:
+													criteria_cur = {
+														"Measurement":{
+															"CodesetId": cnt,
+															"ValueAsNumber":{
+																"Value": value,
+																"Op": op
+															}
+														}
+													}
 												primary_criteria["CriteriaList"].append(criteria_cur)
 												break
 											# only one attribute, and has been processed already, so jump out of the loop
@@ -487,35 +521,44 @@ def json_trans(request):
 													}
 												}
 												additional_criteria["CriteriaList"].append(criteria_cur)
+												has_additional_criteria = True
 											break
 											if single3 == 1:
 												break
+							if has_additional_criteria == False:
+								# set the entity occurance to be 1								
+								if itr['@class'] == "Condition":
+									entity = "ConditionOccurrence"
+								elif itr['@class'] == "Observation":
+									entity = "Observation"
+								elif itr['@class'] == "Procedure_Device":
+									entity = "ProcedureOccurrence"
+								elif itr['@class'] == "Drug":
+									entity = "DrugExposure"
+								criteria_cur = {
+										"Criteria":{
+											entity: {
+												"CodesetId": cnt
+											}
+										},
+										"StartWindow":{
+											"Start":{
+												"Coeff":-1
+											},
+											"End":{
+												"Coeff": 1
+											}
+										},
+										"Occurrence":{
+											"Type": 2,
+											"Count": 1
+										}
+								}
+								additional_criteria["CriteriaList"].append(criteria_cur)
 
-							# get the CDR of each concept
-							if payload == []:
-								count = []
-							else:
-								url_cnt = "http://54.242.168.196/WebAPI/CS1/cdmresults/conceptRecordCount"
-								# fetch all the counts informaiton
-								response = requests.post(url_cnt, data=json.dumps(payload), headers=headers)
-								count = json.loads(response.text)
 
-							new_count = []
-							for icount in count:
-								if icount['value'][1] != 0:
-									new_count.append(icount)
-							# sort the count based on ['value'][1] field
-							new_count = sorted(new_count,key=lambda k:k['value'][1], reverse = True)
-
-							counts_orig['count'].append(new_count)
-							for itr4 in concepts:
-								concept = { "concept": itr4 }
-								concept_set["expression"]["items"].append(concept);
-
-							#   append the concept the the ohdsi variable, and increase the number by one
-							ohdsi["ConceptSets"].append(concept_set)
-							cnt += 1
-
+							if itr['$'] != "age":
+								cnt += 1
 
 							if single1 == 1:
 								break

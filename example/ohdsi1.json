@@ -22,20 +22,6 @@
               "VOCABULARY_ID": "SNOMED",
               "CONCEPT_CLASS_ID": "Clinical Finding",
               "STANDARD_CONCEPT_CAPTION": "Standard",
-              "CONCEPT_NAME": "Shivering or rigors",
-              "INVALID_REASON": "V",
-              "STANDARD_CONCEPT": "S",
-              "INVALID_REASON_CAPTION": "Valid",
-              "CONCEPT_CODE": "248456009",
-              "DOMAIN_ID": "Condition",
-              "CONCEPT_ID": 4087630
-            }
-          },
-          {
-            "concept": {
-              "VOCABULARY_ID": "SNOMED",
-              "CONCEPT_CLASS_ID": "Clinical Finding",
-              "STANDARD_CONCEPT_CAPTION": "Standard",
               "CONCEPT_NAME": "Acute HIV infection",
               "INVALID_REASON": "V",
               "STANDARD_CONCEPT": "S",
@@ -43,20 +29,6 @@
               "CONCEPT_CODE": "111880001",
               "DOMAIN_ID": "Condition",
               "CONCEPT_ID": 4008081
-            }
-          },
-          {
-            "concept": {
-              "VOCABULARY_ID": "MedDRA",
-              "CONCEPT_CLASS_ID": "PT",
-              "STANDARD_CONCEPT_CAPTION": "Classification",
-              "CONCEPT_NAME": "Acute HIV infection",
-              "INVALID_REASON": "V",
-              "STANDARD_CONCEPT": "C",
-              "INVALID_REASON_CAPTION": "Valid",
-              "CONCEPT_CODE": "10000807",
-              "DOMAIN_ID": "Condition",
-              "CONCEPT_ID": 36009926
             }
           }
         ]
@@ -183,7 +155,65 @@
     "DemographicCriteriaList": [],
     "Type": "ALL",
     "Groups": [],
-    "CriteriaList": []
+    "CriteriaList": [
+      {
+        "StartWindow": {
+          "Start": {
+            "Coeff": -1
+          },
+          "End": {
+            "Coeff": 1
+          }
+        },
+        "Occurrence": {
+          "Count": 1,
+          "Type": 2
+        },
+        "Criteria": {
+          "ConditionOccurrence": {
+            "CodesetId": 0
+          }
+        }
+      },
+      {
+        "StartWindow": {
+          "Start": {
+            "Coeff": -1
+          },
+          "End": {
+            "Coeff": 1
+          }
+        },
+        "Occurrence": {
+          "Count": 1,
+          "Type": 2
+        },
+        "Criteria": {
+          "ConditionOccurrence": {
+            "CodesetId": 1
+          }
+        }
+      },
+      {
+        "StartWindow": {
+          "Start": {
+            "Coeff": -1
+          },
+          "End": {
+            "Coeff": 1
+          }
+        },
+        "Occurrence": {
+          "Count": 1,
+          "Type": 2
+        },
+        "Criteria": {
+          "ConditionOccurrence": {
+            "CodesetId": 2
+          }
+        }
+      }
+    ]
   },
   "CensoringCriteria": [],
   "ExpressionLimit": {
