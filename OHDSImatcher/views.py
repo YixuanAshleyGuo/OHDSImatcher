@@ -170,6 +170,43 @@ def json_trans(request):
 							if single1 == 1:
 								itr = itrs['entity']
 
+							# entity "female/male" should be handled differently 
+							# and save to the condition occurance of primary criteria list
+							# 
+							lower_entity = itr['$'].lower().strip()
+							if lower_entity == "male" or lower_entity=="female":
+								gender = []
+								if lower_entity=="female":
+									g = {
+										"CONCEPT_CODE": "F",
+										"CONCEPT_ID": 8532,
+										"CONCEPT_NAME": "FEMALE",
+										"DOMAIN_ID": "Gender",
+										"VOCABULARY_ID": "Gender"
+									}
+									gender.append(g)
+								else:
+									g = {
+										"CONCEPT_CODE": "M",
+										"CONCEPT_ID": 8507,
+										"CONCEPT_NAME": "MALE",
+										"DOMAIN_ID": "Gender",
+										"VOCABULARY_ID": "Gender"
+									}
+									gender.append(g)
+								criteria_cur = {
+								"ConditionOccurrence":{
+									"Gender":gender
+									}
+								}
+								primary_criteria["CriteriaList"].append(criteria_cur)
+								if single1 == 1:
+									break
+								else:
+									continue
+
+
+
 #########################################
 # PART I: get the vocabulary
 # iterate the json object and add attribute Concept ID in the json object
@@ -418,10 +455,13 @@ def json_trans(request):
 														value = int(i)
 														break
 												if itr['$'] == "age":
+
 													criteria_cur = {
-													"Age":{
-														"Value": value,
-														"Op": op
+													"ConditionOccurrence":{
+														"Age":{
+															"Value": value,
+															"Op": op
+															}
 														}
 													}
 												else:
@@ -525,7 +565,8 @@ def json_trans(request):
 											break
 											if single3 == 1:
 												break
-							if has_additional_criteria == False:
+							# add default additional criteria when none is found so far
+							if itr['$'] != "age" and has_additional_criteria == False:
 								# set the entity occurance to be 1								
 								if itr['@class'] == "Condition":
 									entity = "ConditionOccurrence"
