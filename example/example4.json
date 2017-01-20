@@ -1,0 +1,415 @@
+{
+  "InclusionRules": [],
+  "QualifiedLimit": {
+    "Type": "First"
+  },
+  "PrimaryCriteria": {
+    "PrimaryCriteriaLimit": {
+      "Type": "All"
+    },
+    "ObservationWindow": {
+      "PostDays": 0,
+      "PriorDays": 0
+    },
+    "CriteriaList": []
+  },
+  "ConceptSets": [
+    {
+      "expression": {
+        "items": [
+          {
+            "concept": {
+              "VOCABULARY_ID": "MedDRA",
+              "CONCEPT_CLASS_ID": "LLT",
+              "STANDARD_CONCEPT_CAPTION": "Classification",
+              "CONCEPT_NAME": "Advanced breast cancer",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "C",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "10072737",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 42893388
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Clinical Finding",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "CONCEPT_NAME": "At risk of breast cancer",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "S",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "705089007",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 45767622
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "MedDRA",
+              "CONCEPT_CLASS_ID": "PT",
+              "STANDARD_CONCEPT_CAPTION": "Classification",
+              "CONCEPT_NAME": "Breast cancer",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "C",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "10006187",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 36617162
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "MedDRA",
+              "CONCEPT_CLASS_ID": "LLT",
+              "STANDARD_CONCEPT_CAPTION": "Classification",
+              "CONCEPT_NAME": "Breast cancer aggravated",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "C",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "10048406",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 36670918
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Clinical Finding",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "CONCEPT_NAME": "Breast cancer detected by national screening programme",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "S",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "94361000000105",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 44811954
+            }
+          }
+        ]
+      },
+      "id": 0,
+      "name": "erbB2+ breast cancer"
+    },
+    {
+      "expression": {
+        "items": [
+          {
+            "concept": {
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Clinical Finding",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "CONCEPT_NAME": "Metastasis to brain of unknown primary",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "S",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "285641009",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 4112780
+            }
+          }
+        ]
+      },
+      "id": 1,
+      "name": "Brain metastasis"
+    },
+    {
+      "expression": {
+        "items": [
+          {
+            "concept": {
+              "VOCABULARY_ID": "MedDRA",
+              "CONCEPT_CLASS_ID": "LLT",
+              "STANDARD_CONCEPT_CAPTION": "Classification",
+              "CONCEPT_NAME": "Primary cancer of liver",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "C",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "10036681",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 35944805
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "MedDRA",
+              "CONCEPT_CLASS_ID": "LLT",
+              "STANDARD_CONCEPT_CAPTION": "Classification",
+              "CONCEPT_NAME": "Primary cancer of liver non-resectable",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "C",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "10036682",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 35944829
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "MedDRA",
+              "CONCEPT_CLASS_ID": "LLT",
+              "STANDARD_CONCEPT_CAPTION": "Classification",
+              "CONCEPT_NAME": "Primary cancer of liver recurrent",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "C",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "10036683",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 35944848
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "MedDRA",
+              "CONCEPT_CLASS_ID": "LLT",
+              "STANDARD_CONCEPT_CAPTION": "Classification",
+              "CONCEPT_NAME": "Primary cancer of liver resectable",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "C",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "10036684",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 35944868
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "MedDRA",
+              "CONCEPT_CLASS_ID": "LLT",
+              "STANDARD_CONCEPT_CAPTION": "Classification",
+              "CONCEPT_NAME": "Unknown primary cancer",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "C",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "10045547",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 36671468
+            }
+          }
+        ]
+      },
+      "id": 2,
+      "name": "primary cancer"
+    },
+    {
+      "expression": {
+        "items": [
+          {
+            "concept": {
+              "VOCABULARY_ID": "MedDRA",
+              "CONCEPT_CLASS_ID": "LLT",
+              "STANDARD_CONCEPT_CAPTION": "Classification",
+              "CONCEPT_NAME": "Advanced breast cancer",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "C",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "10072737",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 42893388
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Clinical Finding",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "CONCEPT_NAME": "At risk of breast cancer",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "S",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "705089007",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 45767622
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "MedDRA",
+              "CONCEPT_CLASS_ID": "PT",
+              "STANDARD_CONCEPT_CAPTION": "Classification",
+              "CONCEPT_NAME": "Breast cancer",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "C",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "10006187",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 36617162
+            }
+          }
+        ]
+      },
+      "id": 3,
+      "name": "breast cancer"
+    },
+    {
+      "expression": {
+        "items": [
+          {
+            "concept": {
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Clinical Finding",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "CONCEPT_NAME": "Metastasis to brain of unknown primary",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "S",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "285641009",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 4112780
+            }
+          }
+        ]
+      },
+      "id": 4,
+      "name": "brain metastasis"
+    },
+    {
+      "expression": {
+        "items": [
+          {
+            "concept": {
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Clinical Finding",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "CONCEPT_NAME": "Disease",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "S",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "64572001",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 4274025
+            }
+          }
+        ]
+      },
+      "id": 5,
+      "name": "disease"
+    }
+  ],
+  "AdditionalCriteria": {
+    "DemographicCriteriaList": [],
+    "Type": "ALL",
+    "Groups": [],
+    "CriteriaList": [
+      {
+        "StartWindow": {
+          "Start": {
+            "Coeff": -1
+          },
+          "End": {
+            "Coeff": 1
+          }
+        },
+        "Occurrence": {
+          "Count": 1,
+          "Type": 2
+        },
+        "Criteria": {
+          "ConditionOccurrence": {
+            "CodesetId": 0
+          }
+        }
+      },
+      {
+        "StartWindow": {
+          "Start": {
+            "Coeff": -1
+          },
+          "End": {
+            "Coeff": 1
+          }
+        },
+        "Occurrence": {
+          "Count": 1,
+          "Type": 2
+        },
+        "Criteria": {
+          "ConditionOccurrence": {
+            "CodesetId": 1
+          }
+        }
+      },
+      {
+        "StartWindow": {
+          "Start": {
+            "Coeff": -1
+          },
+          "End": {
+            "Coeff": 1
+          }
+        },
+        "Occurrence": {
+          "Count": 1,
+          "Type": 2
+        },
+        "Criteria": {
+          "ConditionOccurrence": {
+            "CodesetId": 2
+          }
+        }
+      },
+      {
+        "StartWindow": {
+          "Start": {
+            "Coeff": -1
+          },
+          "End": {
+            "Coeff": 1
+          }
+        },
+        "Occurrence": {
+          "Count": 1,
+          "Type": 2
+        },
+        "Criteria": {
+          "ConditionOccurrence": {
+            "CodesetId": 3
+          }
+        }
+      },
+      {
+        "StartWindow": {
+          "Start": {
+            "Coeff": -1
+          },
+          "End": {
+            "Coeff": 1
+          }
+        },
+        "Occurrence": {
+          "Count": 1,
+          "Type": 2
+        },
+        "Criteria": {
+          "ConditionOccurrence": {
+            "CodesetId": 4
+          }
+        }
+      },
+      {
+        "StartWindow": {
+          "Start": {
+            "Coeff": -1
+          },
+          "End": {
+            "Coeff": 1
+          }
+        },
+        "Occurrence": {
+          "Count": 1,
+          "Type": 2
+        },
+        "Criteria": {
+          "ConditionOccurrence": {
+            "CodesetId": 5
+          }
+        }
+      }
+    ]
+  },
+  "CensoringCriteria": [],
+  "ExpressionLimit": {
+    "Type": "First"
+  }
+}

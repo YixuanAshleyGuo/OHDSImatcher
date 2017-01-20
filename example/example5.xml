@@ -1,0 +1,80 @@
+<root>
+	<sent>
+		<text>Inclusion Criteria O - Male or Female patients , over the age of 18 , diagnosed pre surgically with T1 or T2 breast cancer and scheduled for surgery including sentinel node dissection .</text>
+		<attribute class="Measurement" index="T1" start="9"> over </attribute>
+		 <entity class="Observation" index="T2" negated="N" start="11"> age </entity>
+		 <attribute class="Measurement" index="T3" start="13"> 18 </attribute>
+		 <entity class="Condition" index="T4" negated="N" start="22"> breast cancer </entity>
+		 <entity class="Procedure_Device" index="T5" negated="N" start="27"> surgery </entity>
+		
+
+	</sent>
+	<sent>
+		<text>Exclusion Criteria O - Patients diagnosed pre surgically with large or locally advanced ( T3 and T4 ) breast cancers .</text>
+		<entity class="Condition" index="T6" negated="N" relation="None" start="18"> breast cancers </entity>
+		
+
+	</sent>
+	<sent>
+		<text>- Patients diagnosed with inflammatory breast cancer .</text>
+		<entity class="Condition" index="T7" negated="N" relation="None" start="4"> inflammatory breast cancer </entity>
+		
+
+	</sent>
+	<sent>
+		<text>- Patients diagnosed with ductal carcinoma in situ ( DCIS ) when breast conserving is to be done .</text>
+		<entity class="Condition" index="T8" negated="N" relation="None" start="4"> ductal carcinoma in situ </entity>
+		
+
+	</sent>
+	<sent>
+		<text>- Patients who are pregnant , as confirmed by a patient treating physician interview .</text>
+		<entity class="Condition" index="T9" negated="N" relation="None" start="4"> pregnant </entity>
+		
+
+	</sent>
+	<sent>
+		<text>- Patients with suspicious palpable axillary lymph nodes .</text>
+		
+
+	</sent>
+	<sent>
+		<text>- Patients currently being treated for or previously diagnosed with , another type of carcinoma .</text>
+		<attribute class="Temporal_measurement" index="T10" start="2"> currently </attribute>
+		 <entity class="Condition" index="T11" negated="N" relation="T10:has_temp" start="14"> carcinoma </entity>
+		
+
+	</sent>
+	<sent>
+		<text>- Patients who have undergone prior non oncologic breast surgery or axillary surgery .</text>
+		<entity class="Procedure_Device" index="T12" negated="N" relation="None" start="8"> breast surgery </entity>
+		 <entity class="Procedure_Device" index="T13" negated="N" relation="None" start="11"> axillary surgery </entity>
+		
+
+	</sent>
+	<sent>
+		<text>- Patients who have received pre-operative systemic therapy .</text>
+		<attribute class="Qualifier" index="T14" start="5"> pre-operative </attribute>
+		 <entity class="Drug" index="T15" negated="N" relation="T14:modified_by" start="6"> systemic therapy </entity>
+		
+
+	</sent>
+	<sent>
+		<text>- Patients who have been judged to be inappropriate by a medical care provider ( i . e .</text>
+		
+
+	</sent>
+	<sent>
+		<text>surgeon , oncologist , pathologists , etc .</text>
+		<entity class="Drug" index="T16" negated="N" relation="None" start="0"> surgeon </entity>
+		 <entity class="Drug" index="T17" negated="N" relation="None" start="2"> oncologist </entity>
+		 <entity class="Drug" index="T18" negated="N" relation="None" start="4"> pathologists </entity>
+		
+
+	</sent>
+	<sent>
+		<text>) .</text>
+		
+
+	</sent>
+</root>

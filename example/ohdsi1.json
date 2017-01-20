@@ -11,7 +11,29 @@
       "PostDays": 0,
       "PriorDays": 0
     },
-    "CriteriaList": []
+    "CriteriaList": [
+      {
+        "ConditionOccurrence": {
+          "Gender": [
+            {
+              "VOCABULARY_ID": "Gender",
+              "CONCEPT_NAME": "FEMALE",
+              "CONCEPT_CODE": "F",
+              "DOMAIN_ID": "Gender",
+              "CONCEPT_ID": 8532
+            }
+          ]
+        }
+      },
+      {
+        "ConditionOccurrence": {
+          "Age": {
+            "Value": 30,
+            "Op": "gt"
+          }
+        }
+      }
+    ]
   },
   "ConceptSets": [
     {
@@ -29,6 +51,76 @@
               "CONCEPT_CODE": "111880001",
               "DOMAIN_ID": "Condition",
               "CONCEPT_ID": 4008081
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "MedDRA",
+              "CONCEPT_CLASS_ID": "PT",
+              "STANDARD_CONCEPT_CAPTION": "Classification",
+              "CONCEPT_NAME": "Acute HIV infection",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "C",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "10000807",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 36009926
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "CIEL",
+              "CONCEPT_CLASS_ID": "Diagnosis",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "Acute HIV Infection",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "149741",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 45929598
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "ICD10",
+              "CONCEPT_CLASS_ID": "ICD10 code",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "Acute HIV infection syndrome",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "B23.0",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 45576260
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "MedDRA",
+              "CONCEPT_CLASS_ID": "LLT",
+              "STANDARD_CONCEPT_CAPTION": "Classification",
+              "CONCEPT_NAME": "Acute HIV syndrome",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "C",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "10067249",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 36045971
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "MedDRA",
+              "CONCEPT_CLASS_ID": "LLT",
+              "STANDARD_CONCEPT_CAPTION": "Classification",
+              "CONCEPT_NAME": "Acute infection with HIV",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "C",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "10000811",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 36045967
             }
           }
         ]

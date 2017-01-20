@@ -1,0 +1,50 @@
+<root>
+	<sent>
+		<text>Inclusion Criteria O 1 .</text>
+		
+
+	</sent>
+	<sent>
+		<text>Female patients diagnosed with erbB2+ breast cancer .</text>
+		<entity class="Condition" index="T1" negated="N" relation="None" start="4"> erbB2+ breast cancer </entity>
+		
+
+	</sent>
+	<sent>
+		<text>ErbB2 positivity will be as determined by respective institutional standards , and will be based on medical history only .</text>
+		
+
+	</sent>
+	<sent>
+		<text>2 .</text>
+		
+
+	</sent>
+	<sent>
+		<text>Brain metastasis diagnosis made between January 2006 - December 2008 .</text>
+		<entity class="Condition" index="T2" negated="N" relation="None" start="0"> Brain metastasis </entity>
+		 <attribute class="Measurement" index="T3" start="4"> between January 2006 - December 2008 </attribute>
+		
+
+	</sent>
+	<sent>
+		<text>Exclusion Criteria O 1 .</text>
+		
+
+	</sent>
+	<sent>
+		<text>Women who have another primary cancer diagnosed between the time of breast cancer diagnosis and brain metastasis . . 2 .</text>
+		<attribute class="Qualifier" index="T4" start="3"> another </attribute>
+		 <entity class="Condition" index="T5" negated="N" relation="T4:modified_by" start="4"> primary cancer </entity>
+		 <entity class="Condition" index="T6" negated="N" relation="None" start="11"> breast cancer </entity>
+		 <entity class="Condition" index="T7" negated="N" relation="None" start="15"> brain metastasis </entity>
+		
+
+	</sent>
+	<sent>
+		<text>Patient has leptomeningeal metastases only without parenchymal brain involvement ( since this pattern of the disease requires a different treatment approach . )</text>
+		<entity class="Condition" index="T8" negated="N" relation="None" start="15"> disease </entity>
+		
+
+	</sent>
+</root>
