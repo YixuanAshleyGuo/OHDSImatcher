@@ -38,18 +38,29 @@ def eliie_nct(request,slug):
 		eliieform = EliIEInputForm()
 		nct_eli = {}
 		if slug[0:3] != "NCT" and slug[0:3] != "nct":
-			nct_txt = "entered ClinicalTrials.gov ID: "+slug+", but this is not valid!"
+			nct_eli['text'] = str("You entered ClinicalTrials.gov ID: "+slug+", but this is not valid!")
 		else:
 			url = "https://clinicaltrials.gov/show/"+slug+"?displayxml=true"
 			response = urllib.urlopen(url)
 			try:
 				nct_orig = response.read().decode('utf-8')
-				nct_root = ET.fromstring(nct_orig)
+				try:
+					nct_root = ET.fromstring(nct_orig)
+				except:
+					nct_eli['text'] = str("You entered ClinicalTrials.gov ID: "+slug+", but this is not valid!")
+					context = {
+						'nct_eli': nct_eli,
+						'eliieform': eliieform
+					}
+					return render(request,'OHDSImatcher/eliie.html',context)
 				eli = nct_root.findall('eligibility')[0]
-				nct_txt = "entered ClinicalTrials.gov ID: "+slug+", and success fetch response."
+				# nct_txt = "entered ClinicalTrials.gov ID: "+slug+", and success fetch response."
 				for child in eli:
 					if child.tag == "criteria":
-						nct_eli['text'] = child.findall('textblock')[0].text
+						txt = child.findall('textblock')[0].text
+						txt = txt.replace('\n','')
+						txt = re.sub(' +',' ', txt).strip()
+						nct_eli['text'] = txt
 					elif child.tag == "gender":
 						nct_eli['gender'] = child.text
 					elif child.tag == "minimum_age":
@@ -58,7 +69,7 @@ def eliie_nct(request,slug):
 						nct_eli['max_age'] = child.text			
 
 			except ValueError:
-				nct_txt = "entered ClinicalTrials.gov ID: "+slug+", and but did not fetch response!"
+				nct_eli['text'] =  str("You entered ClinicalTrials.gov ID: "+slug+", and but did not fetch response!")
 				print "the clinical trial NCT does not match any record"
 
 		context = {
