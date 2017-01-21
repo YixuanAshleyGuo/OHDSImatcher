@@ -236,8 +236,8 @@ def json_trans(request):
 # Request Method:POST
 # url_con = "http://discovery.dbmi.columbia.edu:8080/WebAPI/Synpuf-1-Percent/vocabulary/search"
 							# if the entity is "age", do not treat it as concept
-							if itr['$'] != "age":
-
+							if lower_entity != "age" and lower_entity != "ages":
+								print 'not age and not ages'
 								params = {
 									"QUERY": itr['$'],
 									"DOMAIN_ID": [itr['@class']]
@@ -407,7 +407,7 @@ def json_trans(request):
 												attr = itr_attr['$']
 												# if the value is int, handle differently, set op to be "gt" by default
 												if isinstance(attr, int):
-													if itr['$'] == "age":
+													if lower_entity == "age" or lower_entity == "ages":
 														criteria_cur = {
 														"ConditionOccurrence":{
 															"Age":{
@@ -430,15 +430,15 @@ def json_trans(request):
 													break
 
 												# if the value has between keyword, means that it has lower and upper values
-												if attr.find("between") != -1:
+												if attr.find("between") != -1 or attr.find("to") != -1:
 													op = "bt"
 													value = [0,0]
 													j = 0
 													for i in attr.split():
-														if j < 1 and i.isdigit():
+														if j < 2 and i.isdigit():
 															value[j] = int(i)
 															j += 1
-													if itr['$'] == age:
+													if lower_entity == "age" or lower_entity == "ages":
 														criteria_cur = {
 														"ConditionOccurrence":{
 															"Age":{
@@ -476,8 +476,7 @@ def json_trans(request):
 													if i.isdigit():
 														value = int(i)
 														break
-												if itr['$'] == "age":
-
+												if itr['$'] == "age"  or lower_entity == "ages":
 													criteria_cur = {
 													"ConditionOccurrence":{
 														"Age":{
@@ -588,7 +587,7 @@ def json_trans(request):
 											if single3 == 1:
 												break
 							# add default additional criteria when none is found so far
-							if itr['$'] != "age" and has_additional_criteria == False:
+							if lower_entity != "age"  and lower_entity != "ages" and has_additional_criteria == False:
 								# set the entity occurance to be 1								
 								if itr['@class'] == "Condition":
 									entity = "ConditionOccurrence"
@@ -620,7 +619,7 @@ def json_trans(request):
 								additional_criteria["CriteriaList"].append(criteria_cur)
 
 
-							if itr['$'] != "age":
+							if lower_entity != "age" and lower_entity != "ages":
 								cnt += 1
 
 							if single1 == 1:
