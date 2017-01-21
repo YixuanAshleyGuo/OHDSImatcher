@@ -60,7 +60,18 @@ def eliie_nct(request,slug):
 						txt = child.findall('textblock')[0].text
 						txt = txt.replace('\n','')
 						txt = re.sub(' +',' ', txt).strip()
-						nct_eli['text'] = txt
+						tnote = txt.split(' -')
+						textarea=''
+						for x in tnote:
+							if 'Exclusion Criteria' in  x:
+								temp = x.split('.')
+								textarea=textarea+temp[0]+'.'+'\n'
+								textarea=textarea+temp[1]+'\n'
+							else:
+								textarea=textarea+x+'\n'
+							
+
+						nct_eli['text'] = textarea
 					elif child.tag == "gender":
 						nct_eli['gender'] = child.text
 					elif child.tag == "minimum_age":
