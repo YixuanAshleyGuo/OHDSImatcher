@@ -50,7 +50,7 @@ def eliie_nct(request,slug):
 					nct_root = ET.fromstring(nct_orig)
 				except:
 					print 'ET not working'
-					nct_eli['text'] = str("You entered ClinicalTrials.gov ID: "+slug+", but this is not valid!")
+					nct_eli['text'] = str("You entered ClinicalTrials.gov ID: "+slug+", but this is not valid or there is error in parsing the result from ClincalTrials.gov!")
 					context = {
 						'nct_eli': nct_eli,
 						'eliieform': eliieform
@@ -151,6 +151,7 @@ def json_trans(request):
 		"DemographicCriteriaList": [],
 		"Groups": []
 	}
+	demographic_criteria = {}
 	if request.method == 'POST':
 		xmlform = XMLInputForm(data = request.POST)
 		print("about to validate XML input form")
@@ -220,18 +221,11 @@ def json_trans(request):
 										"VOCABULARY_ID": "Gender"
 									}
 									gender.append(g)
-								criteria_cur = {
-								"ConditionOccurrence":{
-									"Gender":gender
-									}
-								}
-								primary_criteria["CriteriaList"].append(criteria_cur)
+								demographic_criteria["Gender"]=gender
 								if single1 == 1:
 									break
 								else:
 									continue
-
-
 
 #########################################
 # PART I: get the vocabulary
@@ -412,14 +406,11 @@ def json_trans(request):
 												# if the value is int, handle differently, set op to be "gt" by default
 												if isinstance(attr, int):
 													if lower_entity == "age" or lower_entity == "ages":
-														criteria_cur = {
-														"ConditionOccurrence":{
-															"Age":{
-																"Value": attr,
-																"Op": "gt",
-																}
-															}
+														demographic_criteria["Age"]={
+															"Value": attr,
+															"Op": "gt",
 														}
+														break
 													else:
 														criteria_cur = {
 														"Measurement":{
@@ -443,15 +434,12 @@ def json_trans(request):
 															value[j] = int(i)
 															j += 1
 													if lower_entity == "age" or lower_entity == "ages":
-														criteria_cur = {
-														"ConditionOccurrence":{
-															"Age":{
-																"Value": value[0],
-																"Extent": value[1],
-																"Op": op
-																}
-															}
+														demographic_criteria["Age"]={
+															"Value": value[0],
+															"Extent": value[1],
+															"Op": op
 														}
+														break
 													else:
 														criteria_cur = {
 															"Measurement":{
@@ -481,14 +469,11 @@ def json_trans(request):
 														value = int(i)
 														break
 												if itr['$'] == "age"  or lower_entity == "ages":
-													criteria_cur = {
-													"ConditionOccurrence":{
-														"Age":{
-															"Value": value,
-															"Op": op
-															}
-														}
+													demographic_criteria["Age"]={
+														"Value": value,
+														"Op": op,
 													}
+													break
 												else:
 													criteria_cur = {
 														"Measurement":{
@@ -644,6 +629,7 @@ def json_trans(request):
 			ohdsi["InclusionRules"] = []
 			ohdsi["CensoringCriteria"] = []
 			ohdsi["PrimaryCriteria"] = primary_criteria
+			additional_criteria["DemographicCriteriaList"].append(demographic_criteria) 
 			ohdsi["AdditionalCriteria"] = additional_criteria
 			ohdsiconcept = json.dumps(ohdsi)
 			counts = json.dumps(counts_orig)
