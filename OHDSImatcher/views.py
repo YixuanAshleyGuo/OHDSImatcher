@@ -44,9 +44,12 @@ def eliie_nct(request,slug):
 			response = urllib.urlopen(url)
 			try:
 				nct_orig = response.read().decode('utf-8')
+				nct_orig = nct_orig.encode('ascii','ignore')
+				# print nct_orig
 				try:
 					nct_root = ET.fromstring(nct_orig)
 				except:
+					print 'ET not working'
 					nct_eli['text'] = str("You entered ClinicalTrials.gov ID: "+slug+", but this is not valid!")
 					context = {
 						'nct_eli': nct_eli,
@@ -58,20 +61,27 @@ def eliie_nct(request,slug):
 				for child in eli:
 					if child.tag == "criteria":
 						txt = child.findall('textblock')[0].text
-						txt = txt.replace('\n','')
-						txt = re.sub(' +',' ', txt).strip()
-						tnote = txt.split(' -')
-						textarea=''
-						for x in tnote:
-							if 'Exclusion Criteria' in  x:
-								temp = x.split('.')
-								textarea=textarea+temp[0]+'.'+'\n'
-								textarea=textarea+temp[1]+'\n'
+						txt_list = txt.split('\n')
+						textarea = ''
+						# the returned raw text contains false line break
+						# find the false line break and conncet the original sentence together
+						prev_continue = True
+						for ilist in txt_list:
+							ilist_parse = re.sub(' +',' ',ilist).lower().strip()
+							if ilist_parse == '':
+								continue
+							# if the first character is alphabetic, then continue with previous line
+							if prev_continue and ilist_parse.find("clusion criteria") == -1 and ilist_parse[0].isalpha():
+								textarea += ' '+ilist.strip()
 							else:
-								textarea=textarea+x+'\n'
-							
+								textarea += '\n'+ilist.strip()
+							# the current line end with stop punctuation, the next line should have \n even if it start with alphabetic
+							if ilist_parse[len(ilist_parse)-1] == "." or ilist_parse.find("clusion criteria") != -1:
+								prev_continue = False
+							else:
+								prev_continue = True
 
-						nct_eli['text'] = textarea
+						nct_eli['text'] = textarea[1:]
 					elif child.tag == "gender":
 						nct_eli['gender'] = child.text
 					elif child.tag == "minimum_age":
@@ -90,12 +100,6 @@ def eliie_nct(request,slug):
 		return render(request,'OHDSImatcher/eliie.html',context)
 
 def eliie_exec(post):
-	# eliieform = EliIEForm(data = post)
-	# eliieform = EliIEForm
-	# eliieform2 = EliIEForm()
-	# print "about to validate EliIE input form "
-	# print eliieform.cleaned_data['eliie_input_free_text']
-	# if eliieform2.is_valid():
 	data = {
 		'eliie_input_free_text':post['eliie_input_free_text'], 
 		'eliie_package_directory':"/Users/cyixuan/Documents/CUMC_STUDY/SymbolicMethods/Thesis/EliIE",
