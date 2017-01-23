@@ -468,7 +468,7 @@ def json_trans(request):
 													if i.isdigit():
 														value = int(i)
 														break
-												if itr['$'] == "age"  or lower_entity == "ages":
+												if lower_entity == "age"  or lower_entity == "ages":
 													demographic_criteria["Age"]={
 														"Value": value,
 														"Op": op,
