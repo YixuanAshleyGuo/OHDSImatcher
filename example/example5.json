@@ -1,0 +1,1179 @@
+{
+  "InclusionRules": [],
+  "QualifiedLimit": {
+    "Type": "First"
+  },
+  "PrimaryCriteria": {
+    "PrimaryCriteriaLimit": {
+      "Type": "All"
+    },
+    "ObservationWindow": {
+      "PostDays": 0,
+      "PriorDays": 0
+    },
+    "CriteriaList": []
+  },
+  "ConceptSets": [
+    {
+      "expression": {
+        "items": [
+          {
+            "concept": {
+              "VOCABULARY_ID": "MedDRA",
+              "CONCEPT_CLASS_ID": "PT",
+              "STANDARD_CONCEPT_CAPTION": "Classification",
+              "CONCEPT_NAME": "Breast cancer",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "C",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "10006187",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 36617162
+            }
+          }
+        ]
+      },
+      "id": 0,
+      "name": "breast cancer"
+    },
+    {
+      "expression": {
+        "items": [
+          {
+            "concept": {
+              "VOCABULARY_ID": "CPT4",
+              "CONCEPT_CLASS_ID": "CPT4 Hierarchy",
+              "STANDARD_CONCEPT_CAPTION": "Classification",
+              "CONCEPT_NAME": "Surgery",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "C",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "1003143",
+              "DOMAIN_ID": "Procedure",
+              "CONCEPT_ID": 45888085
+            }
+          }
+        ]
+      },
+      "id": 1,
+      "name": "surgery"
+    },
+    {
+      "expression": {
+        "items": [
+          {
+            "concept": {
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Clinical Finding",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "Cancers",
+              "INVALID_REASON": "U",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Invalid",
+              "CONCEPT_CODE": "187597000",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 40380839
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "Read",
+              "CONCEPT_CLASS_ID": "Read",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "Cancers",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "B....11",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 45499721
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "MedDRA",
+              "CONCEPT_CLASS_ID": "LLT",
+              "STANDARD_CONCEPT_CAPTION": "Classification",
+              "CONCEPT_NAME": "HIV infection with secondary cancers",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "C",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "10020177",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 36046015
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "MedDRA",
+              "CONCEPT_CLASS_ID": "LLT",
+              "STANDARD_CONCEPT_CAPTION": "Classification",
+              "CONCEPT_NAME": "Human immunodeficiency virus type I infection with secondary cancers",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "C",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "10020450",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 36046016
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Clinical Finding",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "Human immunodeficiency virus with secondary cancers",
+              "INVALID_REASON": "U",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Invalid",
+              "CONCEPT_CODE": "186709004",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 4087605
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "Read",
+              "CONCEPT_CLASS_ID": "Read",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "Human immunodeficiency virus with secondary cancers",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "A788600",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 45452940
+            }
+          }
+        ]
+      },
+      "id": 2,
+      "name": "breast cancers"
+    },
+    {
+      "expression": {
+        "items": [
+          {
+            "concept": {
+              "VOCABULARY_ID": "MedDRA",
+              "CONCEPT_CLASS_ID": "LLT",
+              "STANDARD_CONCEPT_CAPTION": "Classification",
+              "CONCEPT_NAME": "Inflammatory breast cancer",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "C",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "10021974",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 36671045
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "MedDRA",
+              "CONCEPT_CLASS_ID": "LLT",
+              "STANDARD_CONCEPT_CAPTION": "Classification",
+              "CONCEPT_NAME": "Inflammatory breast cancer stage III",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "C",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "10021975",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 36671040
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "MedDRA",
+              "CONCEPT_CLASS_ID": "LLT",
+              "STANDARD_CONCEPT_CAPTION": "Classification",
+              "CONCEPT_NAME": "Inflammatory breast cancer stage IV",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "C",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "10021976",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 36671042
+            }
+          }
+        ]
+      },
+      "id": 3,
+      "name": "inflammatory breast cancer"
+    },
+    {
+      "expression": {
+        "items": [
+          {
+            "concept": {
+              "VOCABULARY_ID": "MedDRA",
+              "CONCEPT_CLASS_ID": "LLT",
+              "STANDARD_CONCEPT_CAPTION": "Classification",
+              "CONCEPT_NAME": "Ductal carcinoma in situ",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "C",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "10013806",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 36670945
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "ICD10",
+              "CONCEPT_CLASS_ID": "ICD10 code",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "Intraductal carcinoma in situ",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "D05.1",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 45576374
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "ICD10CM",
+              "CONCEPT_CLASS_ID": "4-char nonbill code",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "Intraductal carcinoma in situ of breast",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "D05.1",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 1567737
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Clinical Finding",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "CONCEPT_NAME": "Intraductal carcinoma in situ of breast",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "S",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "109889007",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 4001670
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Clinical Finding",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "Intraductal carcinoma in situ of breast",
+              "INVALID_REASON": "U",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Invalid",
+              "CONCEPT_CODE": "189338004",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 40389473
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "Read",
+              "CONCEPT_CLASS_ID": "Read",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "Intraductal carcinoma in situ of breast",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "B830100",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 45516538
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "CIEL",
+              "CONCEPT_CLASS_ID": "Diagnosis",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "Intraductal Carcinoma in Situ of Breast",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "136619",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 45941272
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "ICD10CM",
+              "CONCEPT_CLASS_ID": "5-char billing code",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "Intraductal carcinoma in situ of left breast",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "D05.12",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 45605341
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "ICD10CM",
+              "CONCEPT_CLASS_ID": "5-char billing code",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "Intraductal carcinoma in situ of right breast",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "D05.11",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 45600577
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "ICD10CM",
+              "CONCEPT_CLASS_ID": "5-char billing code",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "Intraductal carcinoma in situ of unspecified breast",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "D05.10",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 45542678
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "ICD10CM",
+              "CONCEPT_CLASS_ID": "5-char billing code",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "Intraductal carcinoma in situ of unspecified breast",
+              "INVALID_REASON": "D",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Invalid",
+              "CONCEPT_CODE": "D05.19",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 35206480
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Clinical Finding",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "CONCEPT_NAME": "Microcalcifications present in ductal carcinoma in situ",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "S",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "397201007",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 4264856
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Clinical Finding",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "CONCEPT_NAME": "pTis: Ductal carcinoma in situ",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "S",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "373176000",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 4187868
+            }
+          }
+        ]
+      },
+      "id": 4,
+      "name": "ductal carcinoma in situ"
+    },
+    {
+      "expression": {
+        "items": [
+          {
+            "concept": {
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Clinical Finding",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "CONCEPT_NAME": "Patient currently pregnant",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "S",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "77386006",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 4299535
+            }
+          }
+        ]
+      },
+      "id": 5,
+      "name": "pregnant"
+    },
+    {
+      "expression": {
+        "items": [
+          {
+            "concept": {
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Clinical Finding",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "CONCEPT_NAME": "Carcinoma in situ",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "S",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "109355002",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 433435
+            }
+          }
+        ]
+      },
+      "id": 6,
+      "name": "carcinoma"
+    },
+    {
+      "expression": {
+        "items": [
+          {
+            "concept": {
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Procedure",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "CONCEPT_NAME": "Admission to breast surgery department",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "S",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "305409007",
+              "DOMAIN_ID": "Observation",
+              "CONCEPT_ID": 4138055
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Qualifier Value",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "CONCEPT_NAME": "Breast surgery",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "S",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "408469009",
+              "DOMAIN_ID": "Observation",
+              "CONCEPT_ID": 4252369
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "Read",
+              "CONCEPT_CLASS_ID": "Read",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "Breast surgery",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "9b8H.00",
+              "DOMAIN_ID": "Observation",
+              "CONCEPT_ID": 45496313
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Location",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "CONCEPT_NAME": "Breast surgery department",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "S",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "309968000",
+              "DOMAIN_ID": "Observation",
+              "CONCEPT_ID": 4148510
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "HES Specialty",
+              "CONCEPT_CLASS_ID": "HES Specialty",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "CONCEPT_NAME": "Breast surgery (includes suspected neoplasms, cysts etc, does not include cosmetic surgery)",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "S",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "103",
+              "DOMAIN_ID": "Provider Specialty",
+              "CONCEPT_ID": 44777667
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Record Artifact",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "Breast surgery inpatient care plan",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "846031000000102",
+              "DOMAIN_ID": "Type Concept",
+              "CONCEPT_ID": 44809553
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Qualifier Value",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "CONCEPT_NAME": "Breast surgery service",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "S",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "310139001",
+              "DOMAIN_ID": "Observation",
+              "CONCEPT_ID": 4150867
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Procedure",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "CONCEPT_NAME": "Discharge from breast surgery service",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "S",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "306649000",
+              "DOMAIN_ID": "Observation",
+              "CONCEPT_ID": 4137261
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "Read",
+              "CONCEPT_CLASS_ID": "Read",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "Discharge from breast surgery service",
+              "INVALID_REASON": "D",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Invalid",
+              "CONCEPT_CODE": "ZLEQ100",
+              "DOMAIN_ID": "Observation",
+              "CONCEPT_ID": 45454589
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "APC",
+              "CONCEPT_CLASS_ID": "APC",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "CONCEPT_NAME": "Level I Breast Surgery",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "S",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "0028",
+              "DOMAIN_ID": "Observation",
+              "CONCEPT_ID": 38001691
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "APC",
+              "CONCEPT_CLASS_ID": "APC",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "CONCEPT_NAME": "Level II Breast Surgery",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "S",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "0029",
+              "DOMAIN_ID": "Observation",
+              "CONCEPT_ID": 38001692
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "APC",
+              "CONCEPT_CLASS_ID": "APC",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "CONCEPT_NAME": "Level III Breast Surgery",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "S",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "0030",
+              "DOMAIN_ID": "Observation",
+              "CONCEPT_ID": 38001693
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "APC",
+              "CONCEPT_CLASS_ID": "APC",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "CONCEPT_NAME": "Level IV Breast Surgery",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "S",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "0648",
+              "DOMAIN_ID": "Observation",
+              "CONCEPT_ID": 38002094
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Procedure",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "CONCEPT_NAME": "Referral to breast surgery service",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "S",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "306181005",
+              "DOMAIN_ID": "Observation",
+              "CONCEPT_ID": 4141696
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Clinical Finding",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "CONCEPT_NAME": "Seen by breast surgery service",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "S",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "305885009",
+              "DOMAIN_ID": "Observation",
+              "CONCEPT_ID": 4138359
+            }
+          }
+        ]
+      },
+      "id": 7,
+      "name": "breast surgery"
+    },
+    {
+      "expression": {
+        "items": [
+          {
+            "concept": {
+              "VOCABULARY_ID": "CIEL",
+              "CONCEPT_CLASS_ID": "Misc",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "Facial-maxillary surgery department",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "160453",
+              "DOMAIN_ID": "Observation",
+              "CONCEPT_ID": 45955963
+            }
+          }
+        ]
+      },
+      "id": 8,
+      "name": "axillary surgery"
+    },
+    {
+      "expression": {
+        "items": [
+          {
+            "concept": {
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Procedure",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "MST - Multisystemic Therapy",
+              "INVALID_REASON": "D",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Invalid",
+              "CONCEPT_CODE": "880311000000103",
+              "DOMAIN_ID": "Procedure",
+              "CONCEPT_ID": 44810742
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Procedure",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "CONCEPT_NAME": "Multisystemic therapy",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "S",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "702780005",
+              "DOMAIN_ID": "Procedure",
+              "CONCEPT_ID": 45765764
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "Read",
+              "CONCEPT_CLASS_ID": "Read",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "Multisystemic Therapy",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "8GK..00",
+              "DOMAIN_ID": "Procedure",
+              "CONCEPT_ID": 45472925
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "HCPCS",
+              "CONCEPT_CLASS_ID": "HCPCS",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "CONCEPT_NAME": "Multisystemic therapy for juveniles, per 15 minutes",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "S",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "H2033",
+              "DOMAIN_ID": "Observation",
+              "CONCEPT_ID": 2618183
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "LOINC",
+              "CONCEPT_CLASS_ID": "Clinical Observation",
+              "STANDARD_CONCEPT_CAPTION": "Standard",
+              "CONCEPT_NAME": "Systemic therapy/surgery sequence Cancer",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "S",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "42039-8",
+              "DOMAIN_ID": "Measurement",
+              "CONCEPT_ID": 3032847
+            }
+          }
+        ]
+      },
+      "id": 9,
+      "name": "systemic therapy"
+    },
+    {
+      "expression": {
+        "items": [
+          {
+            "concept": {
+              "VOCABULARY_ID": "NDC",
+              "CONCEPT_CLASS_ID": "11-digit NDC",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "ASTRAPRO SURGEON'S GLOVES",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "00186904605",
+              "DOMAIN_ID": "Drug",
+              "CONCEPT_ID": 44908037
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "NDC",
+              "CONCEPT_CLASS_ID": "11-digit NDC",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "ASTRAPRO SURGEON'S GLOVES",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "00186904505",
+              "DOMAIN_ID": "Drug",
+              "CONCEPT_ID": 44924903
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "NDC",
+              "CONCEPT_CLASS_ID": "11-digit NDC",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "ASTRAPRO SURGEON'S GLOVES",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "00186904205",
+              "DOMAIN_ID": "Drug",
+              "CONCEPT_ID": 45078094
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "NDC",
+              "CONCEPT_CLASS_ID": "11-digit NDC",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "ASTRAPRO SURGEON'S GLOVES",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "00186904305",
+              "DOMAIN_ID": "Drug",
+              "CONCEPT_ID": 45094977
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "NDC",
+              "CONCEPT_CLASS_ID": "11-digit NDC",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "ASTRAPRO SURGEON'S GLOVES",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "00186904705",
+              "DOMAIN_ID": "Drug",
+              "CONCEPT_ID": 45128888
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "NDC",
+              "CONCEPT_CLASS_ID": "11-digit NDC",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "ASTRAPRO SURGEON'S GLOVES",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "00186904405",
+              "DOMAIN_ID": "Drug",
+              "CONCEPT_ID": 45145886
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "NDC",
+              "CONCEPT_CLASS_ID": "11-digit NDC",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "ASTRAPRO SURGEON'S GLOVES",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "00186904105",
+              "DOMAIN_ID": "Drug",
+              "CONCEPT_ID": 45299974
+            }
+          }
+        ]
+      },
+      "id": 10,
+      "name": "surgeon"
+    },
+    {
+      "expression": {
+        "items": [
+          {
+            "concept": {
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Social Context",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "Clinical oncologist",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "309295000",
+              "DOMAIN_ID": "Provider Specialty",
+              "CONCEPT_ID": 4206439
+            }
+          }
+        ]
+      },
+      "id": 11,
+      "name": "oncologist"
+    },
+    {
+      "expression": {
+        "items": [
+          {
+            "concept": {
+              "VOCABULARY_ID": "SNOMED",
+              "CONCEPT_CLASS_ID": "Qualifier Value",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "College of American Pathologists Cancer Checklist; Adrenal gland: Resection",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "406018008",
+              "DOMAIN_ID": "Type Concept",
+              "CONCEPT_ID": 4233932
+            }
+          }
+        ]
+      },
+      "id": 12,
+      "name": "pathologists"
+    }
+  ],
+  "AdditionalCriteria": {
+    "DemographicCriteriaList": [
+      {}
+    ],
+    "Type": "ALL",
+    "Groups": [],
+    "CriteriaList": [
+      {
+        "StartWindow": {
+          "Start": {
+            "Coeff": -1
+          },
+          "End": {
+            "Coeff": -1,
+            "Days": 0
+          }
+        },
+        "Occurrence": {
+          "Count": 1,
+          "Type": 2
+        },
+        "Criteria": {
+          "ConditionOccurrence": {
+            "CodesetId": 0
+          }
+        }
+      },
+      {
+        "StartWindow": {
+          "Start": {
+            "Coeff": -1
+          },
+          "End": {
+            "Coeff": -1,
+            "Days": 0
+          }
+        },
+        "Occurrence": {
+          "Count": 1,
+          "Type": 2
+        },
+        "Criteria": {
+          "ProcedureOccurrence": {
+            "CodesetId": 1
+          }
+        }
+      },
+      {
+        "StartWindow": {
+          "Start": {
+            "Coeff": -1
+          },
+          "End": {
+            "Coeff": -1,
+            "Days": 0
+          }
+        },
+        "Occurrence": {
+          "Count": 0,
+          "Type": 0
+        },
+        "Criteria": {
+          "ConditionOccurrence": {
+            "CodesetId": 2
+          }
+        }
+      },
+      {
+        "StartWindow": {
+          "Start": {
+            "Coeff": -1
+          },
+          "End": {
+            "Coeff": -1,
+            "Days": 0
+          }
+        },
+        "Occurrence": {
+          "Count": 0,
+          "Type": 0
+        },
+        "Criteria": {
+          "ConditionOccurrence": {
+            "CodesetId": 3
+          }
+        }
+      },
+      {
+        "StartWindow": {
+          "Start": {
+            "Coeff": -1
+          },
+          "End": {
+            "Coeff": -1,
+            "Days": 0
+          }
+        },
+        "Occurrence": {
+          "Count": 0,
+          "Type": 0
+        },
+        "Criteria": {
+          "ConditionOccurrence": {
+            "CodesetId": 4
+          }
+        }
+      },
+      {
+        "StartWindow": {
+          "Start": {
+            "Coeff": -1
+          },
+          "End": {
+            "Coeff": -1,
+            "Days": 0
+          }
+        },
+        "Occurrence": {
+          "Count": 0,
+          "Type": 0
+        },
+        "Criteria": {
+          "ConditionOccurrence": {
+            "CodesetId": 5
+          }
+        }
+      },
+      {
+        "StartWindow": {
+          "Start": {
+            "Coeff": -1
+          },
+          "End": {
+            "Coeff": -1,
+            "Days": 0
+          }
+        },
+        "Occurrence": {
+          "Count": 0,
+          "Type": 0
+        },
+        "Criteria": {
+          "ConditionOccurrence": {
+            "CodesetId": 6
+          }
+        }
+      },
+      {
+        "StartWindow": {
+          "Start": {
+            "Coeff": -1
+          },
+          "End": {
+            "Coeff": -1,
+            "Days": 0
+          }
+        },
+        "Occurrence": {
+          "Count": 0,
+          "Type": 0
+        },
+        "Criteria": {
+          "ProcedureOccurrence": {
+            "CodesetId": 7
+          }
+        }
+      },
+      {
+        "StartWindow": {
+          "Start": {
+            "Coeff": -1
+          },
+          "End": {
+            "Coeff": -1,
+            "Days": 0
+          }
+        },
+        "Occurrence": {
+          "Count": 0,
+          "Type": 0
+        },
+        "Criteria": {
+          "ProcedureOccurrence": {
+            "CodesetId": 8
+          }
+        }
+      },
+      {
+        "StartWindow": {
+          "Start": {
+            "Coeff": -1
+          },
+          "End": {
+            "Coeff": -1,
+            "Days": 0
+          }
+        },
+        "Occurrence": {
+          "Count": 0,
+          "Type": 0
+        },
+        "Criteria": {
+          "DrugExposure": {
+            "CodesetId": 9
+          }
+        }
+      },
+      {
+        "StartWindow": {
+          "Start": {
+            "Coeff": -1
+          },
+          "End": {
+            "Coeff": -1,
+            "Days": 0
+          }
+        },
+        "Occurrence": {
+          "Count": 0,
+          "Type": 0
+        },
+        "Criteria": {
+          "DrugExposure": {
+            "CodesetId": 10
+          }
+        }
+      },
+      {
+        "StartWindow": {
+          "Start": {
+            "Coeff": -1
+          },
+          "End": {
+            "Coeff": -1,
+            "Days": 0
+          }
+        },
+        "Occurrence": {
+          "Count": 0,
+          "Type": 0
+        },
+        "Criteria": {
+          "DrugExposure": {
+            "CodesetId": 11
+          }
+        }
+      },
+      {
+        "StartWindow": {
+          "Start": {
+            "Coeff": -1
+          },
+          "End": {
+            "Coeff": -1,
+            "Days": 0
+          }
+        },
+        "Occurrence": {
+          "Count": 0,
+          "Type": 0
+        },
+        "Criteria": {
+          "DrugExposure": {
+            "CodesetId": 12
+          }
+        }
+      }
+    ]
+  },
+  "CensoringCriteria": [],
+  "ExpressionLimit": {
+    "Type": "First"
+  }
+}

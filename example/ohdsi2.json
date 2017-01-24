@@ -30,6 +30,34 @@
               "DOMAIN_ID": "Condition",
               "CONCEPT_ID": 45908361
             }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "OXMIS",
+              "CONCEPT_CLASS_ID": "OXMIS",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "CARDIOVASCULAR DISEASE",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "L4170G",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 45529617
+            }
+          },
+          {
+            "concept": {
+              "VOCABULARY_ID": "MeSH",
+              "CONCEPT_CLASS_ID": "Main Heading",
+              "STANDARD_CONCEPT_CAPTION": "Non-Standard",
+              "CONCEPT_NAME": "Cardiovascular Diseases",
+              "INVALID_REASON": "V",
+              "STANDARD_CONCEPT": "N",
+              "INVALID_REASON_CAPTION": "Valid",
+              "CONCEPT_CODE": "D002318",
+              "DOMAIN_ID": "Condition",
+              "CONCEPT_ID": 45611644
+            }
           }
         ]
       },
@@ -38,7 +66,9 @@
     }
   ],
   "AdditionalCriteria": {
-    "DemographicCriteriaList": [],
+    "DemographicCriteriaList": [
+      {}
+    ],
     "Type": "ALL",
     "Groups": [],
     "CriteriaList": [
@@ -49,7 +79,7 @@
             "Days": 730
           },
           "End": {
-            "Coeff": 1,
+            "Coeff": -1,
             "Days": "0"
           }
         },

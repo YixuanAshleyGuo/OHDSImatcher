@@ -11,29 +11,7 @@
       "PostDays": 0,
       "PriorDays": 0
     },
-    "CriteriaList": [
-      {
-        "ConditionOccurrence": {
-          "Gender": [
-            {
-              "VOCABULARY_ID": "Gender",
-              "CONCEPT_NAME": "FEMALE",
-              "CONCEPT_CODE": "F",
-              "DOMAIN_ID": "Gender",
-              "CONCEPT_ID": 8532
-            }
-          ]
-        }
-      },
-      {
-        "ConditionOccurrence": {
-          "Age": {
-            "Value": 30,
-            "Op": "gt"
-          }
-        }
-      }
-    ]
+    "CriteriaList": []
   },
   "ConceptSets": [
     {
@@ -244,7 +222,23 @@
     }
   ],
   "AdditionalCriteria": {
-    "DemographicCriteriaList": [],
+    "DemographicCriteriaList": [
+      {
+        "Gender": [
+          {
+            "VOCABULARY_ID": "Gender",
+            "CONCEPT_NAME": "FEMALE",
+            "CONCEPT_CODE": "F",
+            "DOMAIN_ID": "Gender",
+            "CONCEPT_ID": 8532
+          }
+        ],
+        "Age": {
+          "Value": 30,
+          "Op": "gt"
+        }
+      }
+    ],
     "Type": "ALL",
     "Groups": [],
     "CriteriaList": [
@@ -254,7 +248,8 @@
             "Coeff": -1
           },
           "End": {
-            "Coeff": 1
+            "Coeff": -1,
+            "Days": 0
           }
         },
         "Occurrence": {
@@ -273,7 +268,8 @@
             "Coeff": -1
           },
           "End": {
-            "Coeff": 1
+            "Coeff": -1,
+            "Days": 0
           }
         },
         "Occurrence": {
@@ -292,7 +288,8 @@
             "Coeff": -1
           },
           "End": {
-            "Coeff": 1
+            "Coeff": -1,
+            "Days": 0
           }
         },
         "Occurrence": {

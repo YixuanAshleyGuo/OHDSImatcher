@@ -11,17 +11,7 @@
       "PostDays": 0,
       "PriorDays": 0
     },
-    "CriteriaList": [
-      {
-        "Measurement": {
-          "ValueAsNumber": {
-            "Value": 6,
-            "Op": "lt"
-          },
-          "CodesetId": 0
-        }
-      }
-    ]
+    "CriteriaList": []
   },
   "ConceptSets": [
     {
@@ -62,7 +52,9 @@
     }
   ],
   "AdditionalCriteria": {
-    "DemographicCriteriaList": [],
+    "DemographicCriteriaList": [
+      {}
+    ],
     "Type": "ALL",
     "Groups": [],
     "CriteriaList": [
@@ -72,7 +64,8 @@
             "Coeff": -1
           },
           "End": {
-            "Coeff": 1
+            "Coeff": -1,
+            "Days": 0
           }
         },
         "Occurrence": {
@@ -80,7 +73,11 @@
           "Type": 2
         },
         "Criteria": {
-          "Observation": {
+          "Measurement": {
+            "ValueAsNumber": {
+              "Value": 6,
+              "Op": "lt"
+            },
             "CodesetId": 0
           }
         }

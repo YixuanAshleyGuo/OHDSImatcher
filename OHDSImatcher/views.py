@@ -16,7 +16,9 @@ def index(request):
 def eliie(request):
 	print("you entered the EliIE page")
 	if request.method == 'POST':
-		xml_text = eliie_exec(request.POST)
+		free_text = request.POST['eliie_input_free_text']
+		free_text = free_text.replace('\n',' ')
+		xml_text = eliie_exec(free_text)
 		request.session['xml_text'] = xml_text
 		return HttpResponseRedirect('/json-transform')
 	else:
@@ -31,7 +33,12 @@ def eliie(request):
 def eliie_nct(request,slug):
 	print "you entered the EliIE page at",slug
 	if request.method == 'POST':
-		xml_text = eliie_exec(request.POST)
+		print request.POST['eliie_input_free_text']
+		free_text = request.POST['eliie_input_free_text']
+		free_text = free_text.replace('\n','')
+		print free_text
+		# xml_text = eliie_exec(free_text)
+		xml_text = ""
 		request.session['xml_text'] = xml_text
 		return HttpResponseRedirect('/json-transform')
 	else:
@@ -101,7 +108,7 @@ def eliie_nct(request,slug):
 
 def eliie_exec(post):
 	data = {
-		'eliie_input_free_text':post['eliie_input_free_text'], 
+		'eliie_input_free_text': post, 
 		'eliie_package_directory':"/Users/cyixuan/Documents/CUMC_STUDY/SymbolicMethods/Thesis/EliIE",
 		'eliie_file_name': "EliIE_input_free_text",		
 		'eliie_output_directory':"/Users/cyixuan/Documents/CUMC_STUDY/SymbolicMethods/Thesis/EliIE/Tempfile"
@@ -133,25 +140,6 @@ def eliie_exec(post):
 
 
 def json_trans(request):
-	ohdsiconcept = {}
-	counts_orig = {'count':[]}
-	primary_criteria = {
-		"CriteriaList":[],
-		"ObservationWindow":{
-			"PriorDays":0,
-			"PostDays":0
-		},
-		"PrimaryCriteriaLimit":{
-			"Type": "All"
-		}
-	}
-	additional_criteria = {
-		"Type": "ALL",
-		"CriteriaList":[],
-		"DemographicCriteriaList": [],
-		"Groups": []
-	}
-	demographic_criteria = {}
 	if request.method == 'POST':
 		xmlform = XMLInputForm(data = request.POST)
 		print("about to validate XML input form")
@@ -167,22 +155,83 @@ def json_trans(request):
 			# prepare to send http request
 			headers = {'content-type': 'application/json'}
 			url_con = "http://54.242.168.196/WebAPI/JNJL/vocabulary/search"
-			#define the result variable
+			# define the result variable
 			ohdsi = {'ConceptSets':[]}
+			# define the inner field of result
+			ohdsiconcept = {}
+			counts_orig = {'count':[]}
+			primary_criteria = {
+				"CriteriaList":[],
+				"ObservationWindow":{
+					"PriorDays":0,
+					"PostDays":0
+				},
+				"PrimaryCriteriaLimit":{
+					"Type": "All"
+				}
+			}
+			additional_criteria = {
+				"Type": "ALL",
+				"CriteriaList":[],
+				"DemographicCriteriaList": [],
+				"Groups": []
+			}
+			demographic_criteria = {}
+			#by default, the criteria are inclusion criteria
+			exclusion = False
+			# Type: 0: exactly, 1: at most, 2: at least
+			# Count: the count of occurrence
+			occurrence = [
+			{
+			"Type":2,
+			"Count":1
+			},
+			{
+			"Type":0,
+			"Count":0
+			}
+			]
+			# by default, the occurrence is "at least 1"
+			occur_idx = 0
 
 			cnt = 0
 			if js_obj.get('root') and js_obj['root'].get('sent'):
 				payload = []
 				concepts = []
+				# check if there is only one sentence in the current xml root directory
 				if type(js_obj['root']['sent']) == list:
 					single0 = 0
 				else:
 					single0 = 1
 				for itrs in js_obj['root']['sent']:
+					# check if the current criteria is inclusion criteria or exlusion criteria
+					# set the exclusion flag "exclusion" to corresponding value
+					# by default, demographic information (age, gender) are regarded as inclusion criteria 
+					# and does not influenced by "exclusion"
+					text_tmp = itrs['text']['$'].lower()
+					# by default, the criterias are treated as inclusion criteria
+					if text_tmp.find('inclusion criteria') != -1:
+						exclusion = False
+					elif text_tmp.find('exclusion criteria') != -1:							
+						exclusion = True
+					
+					# for exclusion criteria: change criteria occurrence to "exactly 0"
+					if exclusion == True:
+						occur_idx = 1
+					# for inclusion criteria: change criteria occurrence to "at least 1"
+					else:
+						occur_idx = 0
+
+					# check if the current sentence has entity
 					if single0 == 1 or (itrs.get('entity')):
 						if single0 == 1:
 							itrs = js_obj['root']['sent']
 
+						
+						# print 'exclusion: ',exlusion,' occur_idx: ', occur_idx
+
+
+						# check if there is only one entity in the current sentence
 						if type(itrs['entity']) == list:
 							single1 = 0
 							print "single entity is not true"
@@ -235,7 +284,7 @@ def json_trans(request):
 # url_con = "http://discovery.dbmi.columbia.edu:8080/WebAPI/Synpuf-1-Percent/vocabulary/search"
 							# if the entity is "age", do not treat it as concept
 							if lower_entity != "age" and lower_entity != "ages":
-								print 'not age and not ages'
+								print 'the entity is either age or ages'
 								params = {
 									"QUERY": itr['$'],
 									"DOMAIN_ID": [itr['@class']]
@@ -343,7 +392,6 @@ def json_trans(request):
 								concept_set = {
 									"id": cnt,							
 									"name": itr['$'],
-									# "domain": itr['@class'],
 									"expression": {
 										"items": []
 									}
@@ -380,9 +428,13 @@ def json_trans(request):
 # PART III: get the criteria related to the entity
 # primary criteria: has_value 
 # additional criteria: has_TempMea
-								# negated concept
+								# negation information
+								# together with exclusion criteria flag
+								# to determine whether the occurrence of the concept set is 0 or 1
 								if itr.get('@negation') and itr['@negation'] == "Y":
-									concept_set["isExcluded"] = True
+									# if negated, the condition occurrence should be reversed
+									occur_idx = 1 - occur_idx
+
 
 							has_additional_criteria = False
 							# if the entity has measurement value, add the measurement to the criteria list
@@ -390,7 +442,9 @@ def json_trans(request):
 								relation_split = itr['@relation'].split('|')
 								for irelation in relation_split:
 									print irelation
-									# find the measurement value, insert into primary criteria list
+									# "has_value" relation
+									# find the measurement value, 
+									# insert into additional criteria list
 									if irelation.find("has_value") != -1:
 										idx = irelation.split(':')[0]
 										print("find has_value at ", idx)
@@ -403,29 +457,45 @@ def json_trans(request):
 												itr_attr = itrs['attribute']
 											if itr_attr['@index'] == idx:
 												attr = itr_attr['$']
-												# if the value is int, handle differently, set op to be "gt" by default
+												# situation 1: if the value is int, 
+												# handle differently, set op to be "gt" by default
 												if isinstance(attr, int):
 													if lower_entity == "age" or lower_entity == "ages":
 														demographic_criteria["Age"]={
 															"Value": attr,
 															"Op": "gt",
 														}
-														break
 													else:
 														criteria_cur = {
-														"Measurement":{
-															"CodesetId": cnt,
-															"ValueAsNumber":{
-																"Value": attr,
-																"Op": "gt"
+														"Criteria":{
+															"Measurement":{
+																"CodesetId": cnt,
+																"ValueAsNumber":{
+																	"Value": attr,
+																	"Op": "gt"
 																}
 															}
+														},
+														"StartWindow":{
+															"Start":{
+															"Coeff":-1
+															},
+															"End":{
+															"Days":0,
+															"Coeff":-1
+															}
+														},
+														"Occurrence":occurrence[occur_idx]
 														}
-													primary_criteria["CriteriaList"].append(criteria_cur)
+														additional_criteria["CriteriaList"].append(criteria_cur)
+														has_additional_criteria = True
 													break
 
 												multiple = float(time_unit(attr))/365
-												# if the value has between keyword, means that it has lower and upper values
+												if multiple == 0:
+													multiple = 1
+												# situation 2: if the value has "between" keyword, 
+												# means that it has lower and upper values
 												if attr.find("between") != -1 or attr.find("to") != -1:
 													op = "bt"
 													value = [0,0]
@@ -441,9 +511,9 @@ def json_trans(request):
 															"Extent": value[1]*multiple,
 															"Op": op
 														}
-														break
 													else:
 														criteria_cur = {
+														"Criteria":{
 															"Measurement":{
 																"CodesetId": cnt,
 																"ValueAsNumber":{
@@ -452,10 +522,23 @@ def json_trans(request):
 																	"Op": op
 																}
 															}
+														},
+														"StartWindow":{
+															"Start":{
+															"Coeff":-1
+															},
+															"End":{
+															"Days":0,
+															"Coeff":-1
+															}
+														},
+														"Occurrence":occurrence[occur_idx]
 														}
-													primary_criteria["CriteriaList"].append(criteria_cur)
+														additional_criteria["CriteriaList"].append(criteria_cur)
+														has_additional_criteria = True
 													break
 
+												# situation 3: the value is simply > or < or =
 												# extract the value information
 												if attr.find("less than") != -1 or attr.find("smaller than") != -1 or attr.find("<=") != -1:
 													op = "lt"
@@ -475,9 +558,9 @@ def json_trans(request):
 														"Value": value*multiple,
 														"Op": op,
 													}
-													break
 												else:
 													criteria_cur = {
+													"Criteria":{
 														"Measurement":{
 															"CodesetId": cnt,
 															"ValueAsNumber":{
@@ -485,8 +568,19 @@ def json_trans(request):
 																"Op": op
 															}
 														}
-													}
-												primary_criteria["CriteriaList"].append(criteria_cur)
+													},
+													"StartWindow":{
+														"Start":{
+														"Coeff":-1
+														},
+														"End":{
+														"Days":0,
+														"Coeff":-1
+														}
+													},
+													"Occurrence": occurrence[occur_idx]													}
+													additional_criteria["CriteriaList"].append(criteria_cur)
+													has_additional_criteria = True
 												break
 											# only one attribute, and has been processed already, so jump out of the loop
 											if single2 == 1:
@@ -557,13 +651,10 @@ def json_trans(request):
 														},
 														"End":{
 															"Days": "0",
-															"Coeff": 1
+															"Coeff": -1
 														}
 													},
-													"Occurrence":{
-														"Type": 2,
-														"Count": 1														
-													}
+													"Occurrence": occurrence[occur_idx]
 												}
 												additional_criteria["CriteriaList"].append(criteria_cur)
 												has_additional_criteria = True
@@ -592,19 +683,19 @@ def json_trans(request):
 												"Coeff":-1
 											},
 											"End":{
-												"Coeff": 1
+												"Days":0,
+												"Coeff":-1
 											}
 										},
-										"Occurrence":{
-											"Type": 2,
-											"Count": 1
-										}
+										"Occurrence": occurrence[occur_idx]
 								}
 								additional_criteria["CriteriaList"].append(criteria_cur)
 
 
 							if lower_entity != "age" and lower_entity != "ages":
 								cnt += 1
+
+							print 'exclusion: ',exclusion,' occur_idx: ', occur_idx
 
 							if single1 == 1:
 								break
