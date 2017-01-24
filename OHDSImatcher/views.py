@@ -424,6 +424,7 @@ def json_trans(request):
 													primary_criteria["CriteriaList"].append(criteria_cur)
 													break
 
+												multiple = float(time_unit(attr))/365
 												# if the value has between keyword, means that it has lower and upper values
 												if attr.find("between") != -1 or attr.find("to") != -1:
 													op = "bt"
@@ -433,10 +434,11 @@ def json_trans(request):
 														if j < 2 and i.isdigit():
 															value[j] = int(i)
 															j += 1
+													
 													if lower_entity == "age" or lower_entity == "ages":
 														demographic_criteria["Age"]={
-															"Value": value[0],
-															"Extent": value[1],
+															"Value": value[0]*multiple,
+															"Extent": value[1]*multiple,
 															"Op": op
 														}
 														break
@@ -470,7 +472,7 @@ def json_trans(request):
 														break
 												if lower_entity == "age"  or lower_entity == "ages":
 													demographic_criteria["Age"]={
-														"Value": value,
+														"Value": value*multiple,
 														"Op": op,
 													}
 													break
@@ -505,15 +507,7 @@ def json_trans(request):
 												attr = itr_attr['$']
 												day = 0
 												# find the unit of time
-												multiple = 0
-												if attr.find("year") != -1 or attr.find("years") != -1 or attr.find("yr") != -1 or attr.find("yrs") != -1:
-													multiple = 365
-												elif attr.find("month") != -1 or attr.find("months") != -1 or attr.find("mo") != -1 or attr.find("mos") != -1:
-													multiple = 30
-												elif attr.find("week") != -1 or attr.find("weeks") != -1 or attr.find("wk") != -1 or attr.find("wks") != -1:
-													multiple = 7
-												elif attr.find("day") != -1 or attr.find("days") != -1:
-													multiple = 1
+												multiple = time_unit(attr)
 												# there is time unit found, the default day count set to 1
 												# note: some description like past year, does not have number, so the default should be 1
 												if multiple != 0:
@@ -548,7 +542,8 @@ def json_trans(request):
 														elif attr_split[i-1][0] == 'x' and attr_split[i-1].splice(0,1).isdigit():
 															day = int(attr_split[i-1].splice(0,1))
 														break
-
+												if day != 0 and multiple == 0:
+													multiple = 1;
 												criteria_cur = {
 													"Criteria":{
 														"ConditionOccurrence":{
@@ -649,6 +644,19 @@ def json_trans(request):
 		'xmlinputform':xmlinputform
 	}
 	return render(request,'OHDSImatcher/json_transform.html',context)
+
+def time_unit(attr):
+	if attr.find("year") != -1 or attr.find("years") != -1 or attr.find("yr") != -1 or attr.find("yrs") != -1:
+		multiple = 365
+	elif attr.find("month") != -1 or attr.find("months") != -1 or attr.find("mo") != -1 or attr.find("mos") != -1:
+		multiple = 30
+	elif attr.find("week") != -1 or attr.find("weeks") != -1 or attr.find("wk") != -1 or attr.find("wks") != -1:
+		multiple = 7
+	elif attr.find("day") != -1 or attr.find("days") != -1:
+		multiple = 1
+	else:
+		multiple = 0
+	return multiple
 
 def json_trans_res(request):
 	if request.session.get('ohdsi') and request.session.get('counts'):
