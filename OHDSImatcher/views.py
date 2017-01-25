@@ -16,9 +16,7 @@ def index(request):
 def eliie(request):
 	print("you entered the EliIE page")
 	if request.method == 'POST':
-		free_text = request.POST['eliie_input_free_text']
-		free_text = free_text.replace('\n',' ')
-		xml_text = eliie_exec(free_text)
+		xml_text = eliie_exec(equest.POST)
 		request.session['xml_text'] = xml_text
 		return HttpResponseRedirect('/json-transform')
 	else:
@@ -33,12 +31,7 @@ def eliie(request):
 def eliie_nct(request,slug):
 	print "you entered the EliIE page at",slug
 	if request.method == 'POST':
-		print request.POST['eliie_input_free_text']
-		free_text = request.POST['eliie_input_free_text']
-		free_text = free_text.replace('\n','')
-		print free_text
-		# xml_text = eliie_exec(free_text)
-		xml_text = ""
+		xml_text = eliie_exec(request.POST)
 		request.session['xml_text'] = xml_text
 		return HttpResponseRedirect('/json-transform')
 	else:
@@ -108,7 +101,7 @@ def eliie_nct(request,slug):
 
 def eliie_exec(post):
 	data = {
-		'eliie_input_free_text': post, 
+		'eliie_input_free_text': post['eliie_input_free_text'], 
 		'eliie_package_directory':"/Users/cyixuan/Documents/CUMC_STUDY/SymbolicMethods/Thesis/EliIE",
 		'eliie_file_name': "EliIE_input_free_text",		
 		'eliie_output_directory':"/Users/cyixuan/Documents/CUMC_STUDY/SymbolicMethods/Thesis/EliIE/Tempfile"
