@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from .forms import XMLInputForm,EliIEInputForm, EliIEForm
-import requests,urllib,json
+import requests,urllib2,json,urllib
 from xmljson import badgerfish as bf
 from xml.etree import ElementTree as ET
 import re
@@ -41,7 +41,7 @@ def eliie_nct(request,slug):
 			nct_eli['text'] = str("You entered ClinicalTrials.gov ID: "+slug+", but this is not valid!")
 		else:
 			url = "https://clinicaltrials.gov/show/"+slug+"?displayxml=true"
-			response = urllib.urlopen(url)
+			response = urllib2.urlopen(url)
 			try:
 				nct_orig = response.read().decode('utf-8')
 				nct_orig = nct_orig.encode('ascii','ignore')
@@ -78,6 +78,9 @@ def eliie_nct(request,slug):
 							# the current line end with stop punctuation, the next line should have \n even if it start with alphabetic
 							if ilist_parse[len(ilist_parse)-1] == "." or ilist_parse.find("clusion criteria") != -1:
 								prev_continue = False
+								print('ll='+ilist_parse)
+								if ilist_parse[len(ilist_parse)-1] == "." and ilist_parse[-4:]=="i.e.":
+									prev_continue = True
 							else:
 								prev_continue = True
 
@@ -102,9 +105,9 @@ def eliie_nct(request,slug):
 def eliie_exec(post):
 	data = {
 		'eliie_input_free_text': post['eliie_input_free_text'], 
-		'eliie_package_directory':"/Users/cyixuan/Documents/CUMC_STUDY/SymbolicMethods/Thesis/EliIE",
+		'eliie_package_directory':"/home/cy2465/EliIE",
 		'eliie_file_name': "EliIE_input_free_text",		
-		'eliie_output_directory':"/Users/cyixuan/Documents/CUMC_STUDY/SymbolicMethods/Thesis/EliIE/Tempfile"
+		'eliie_output_directory':"/home/cy2465/EliIE/Tempfile"
 	}
 
 	# write the free text to file
