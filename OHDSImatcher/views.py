@@ -16,7 +16,7 @@ def index(request):
 def eliie(request):
 	print("you entered the EliIE page")
 	if request.method == 'POST':
-		xml_text = eliie_exec(equest.POST)
+		xml_text = eliie_exec(request.POST)
 		request.session['xml_text'] = xml_text
 		return HttpResponseRedirect('/json-transform')
 	else:
@@ -199,6 +199,9 @@ def json_trans(request):
 				else:
 					single0 = 1
 				for itrs in js_obj['root']['sent']:
+					if single0 == 1:
+						itrs = js_obj['root']['sent']
+
 					# check if the current criteria is inclusion criteria or exlusion criteria
 					# set the exclusion flag "exclusion" to corresponding value
 					# by default, demographic information (age, gender) are regarded as inclusion criteria 
@@ -218,14 +221,7 @@ def json_trans(request):
 						occur_idx = 0
 
 					# check if the current sentence has entity
-					if single0 == 1 or (itrs.get('entity')):
-						if single0 == 1:
-							itrs = js_obj['root']['sent']
-
-						
-						# print 'exclusion: ',exlusion,' occur_idx: ', occur_idx
-
-
+					if itrs.get('entity'):						
 						# check if there is only one entity in the current sentence
 						if type(itrs['entity']) == list:
 							single1 = 0
