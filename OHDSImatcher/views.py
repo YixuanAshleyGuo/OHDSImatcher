@@ -78,7 +78,6 @@ def eliie_nct(request,slug):
 							# the current line end with stop punctuation, the next line should have \n even if it start with alphabetic
 							if ilist_parse[len(ilist_parse)-1] == "." or ilist_parse.find("clusion criteria") != -1:
 								prev_continue = False
-								print('ll='+ilist_parse)
 								if ilist_parse[len(ilist_parse)-1] == "." and ilist_parse[-4:]=="i.e.":
 									prev_continue = True
 							else:
