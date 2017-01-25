@@ -16,7 +16,7 @@ def index(request):
 def eliie(request):
 	print("you entered the EliIE page")
 	if request.method == 'POST':
-		xml_text = eliie_exec(equest.POST)
+		xml_text = eliie_exec(request.POST)
 		request.session['xml_text'] = xml_text
 		return HttpResponseRedirect('/json-transform')
 	else:
@@ -104,9 +104,9 @@ def eliie_nct(request,slug):
 def eliie_exec(post):
 	data = {
 		'eliie_input_free_text': post['eliie_input_free_text'], 
-		'eliie_package_directory':"/home/cy2465/EliIE",
+		'eliie_package_directory':"/Users/yuanchi/Documents/git/EliIE",
 		'eliie_file_name': "EliIE_input_free_text",		
-		'eliie_output_directory':"/home/cy2465/EliIE/Tempfile"
+		'eliie_output_directory':"/Users/yuanchi/Documents/git/EliIE/Tempfile"
 	}
 
 	# write the free text to file
