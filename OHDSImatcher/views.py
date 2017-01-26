@@ -104,9 +104,9 @@ def eliie_nct(request,slug):
 def eliie_exec(post):
 	data = {
 		'eliie_input_free_text': post['eliie_input_free_text'], 
-		'eliie_package_directory':"/Users/yuanchi/Documents/git/EliIE",
+		'eliie_package_directory':"/home/cy2465/EliIE",
 		'eliie_file_name': "EliIE_input_free_text",		
-		'eliie_output_directory':"/Users/yuanchi/Documents/git/EliIE/Tempfile"
+		'eliie_output_directory':"/home/cy2465/EliIE/Tempfile"
 	}
 
 	# write the free text to file
@@ -610,6 +610,8 @@ def json_trans(request):
 														elif attr_split[i-1] == 'three':
 															day = 3
 														elif attr_split[i-1] == 'four':
+															day = 4
+														elif attr_split[i-1] == '4':
 															day = 4
 														elif attr_split[i-1] == 'five':
 															day = 5
