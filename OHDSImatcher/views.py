@@ -611,8 +611,6 @@ def json_trans(request):
 															day = 3
 														elif attr_split[i-1] == 'four':
 															day = 4
-														elif attr_split[i-1] == '4':
-															day = 4
 														elif attr_split[i-1] == 'five':
 															day = 5
 														elif attr_split[i-1] == 'six':
