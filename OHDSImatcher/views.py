@@ -629,6 +629,17 @@ def json_trans(request):
 														break
 												if day != 0 and multiple == 0:
 													multiple = 1;
+												# check if the temporal constraints is "all day - value day before", or "value day - 0 day before" days before index day
+												# by default, the temporal constraints is "all day - value day before", 
+												# e.g has HIV for 2 years =>default=> has HIV for at least 2 years
+												start = -1
+												end = day*multiple
+												attr_lower = attr.lower()
+												# if the situation is temporal constraints is "less than XXX days"
+												if attr_lower.find("within") != -1 or attr_lower.find("past") != -1 or attr_lower.find("previous") != -1 or attr_lower.find("last") != -1 or attr_lower.find("less than") != -1 or attr_lower.find("smaller than") != -1 or attr_lower.find("fewer than") != -1:
+													start = day*multiple
+													end = 0
+	
 												criteria_cur = {
 													"Criteria":{
 														"ConditionOccurrence":{
@@ -637,16 +648,19 @@ def json_trans(request):
 													},
 													"StartWindow":{
 														"Start":{
-															"Days": day*multiple,
 															"Coeff": -1
 														},
 														"End":{
-															"Days": "0",
+															"Days": end,
 															"Coeff": -1
 														}
 													},
 													"Occurrence": occurrence[occur_idx]
 												}
+												# if the start day is not "all", then assign the start day to criteria
+												if start != -1:
+													criteria_cur["StartWindow"]["Start"]["Days"] = start
+
 												additional_criteria["CriteriaList"].append(criteria_cur)
 												has_additional_criteria = True
 											break
